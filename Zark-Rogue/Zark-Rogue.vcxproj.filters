@@ -13,10 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\Creature">
+      <UniqueIdentifier>{824c0060-c48c-418a-aedf-e951075c2184}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Creature.cpp">
+      <Filter>源文件\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>源文件\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemie.cpp">
+      <Filter>源文件\Creature</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Creature.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemie.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
