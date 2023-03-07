@@ -6,8 +6,8 @@
 
 class Enemie : public Creature {
 public:
-    Enemie();
-    Enemie(string name, int hp, int attack, int defense, int speed);
+ 
+    Enemie(string name,string definition, int hp, int attack, int defense, int speed);
 
 };
 

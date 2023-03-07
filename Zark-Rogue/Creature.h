@@ -1,19 +1,17 @@
-#ifndef ANIMAL_H
-#define ANIMAL_H
+#ifndef CEATURE_H
+#define CEATURE_H
 
-#include <iostream>
-#include "string.h"
+#include "Checkeable.h";
 
 using namespace std;
 
-class Creature {
+class Creature:public Checkeable {
 public:
-    Creature();
-    Creature(string name, int hp, int attack, int defense, int speed);
+    //Creature();
+    Creature(string name, string definition,int hp, int attack, int defense, int speed);
     virtual void BeCheked();
 
-private:
-    string name;
+protected:
     int maxHp;
     int curentHP;
     int attack;
