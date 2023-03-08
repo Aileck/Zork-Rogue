@@ -1,8 +1,6 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 
-#include <iostream>
-#include "string.h"
 #include "Checkeable.h";
 
 using namespace std;
@@ -34,6 +32,7 @@ private:
 	int defense;
 	int speed;
 	int critical;
+	bool picked;
 
 };
 

@@ -1,4 +1,7 @@
 #include "Checkeable.h"
+#include <string>
+#include <iostream>
+
 
 Checkeable::Checkeable(string name, string basicdefinition, bool specialcase)
 {

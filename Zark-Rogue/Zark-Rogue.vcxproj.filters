@@ -16,6 +16,9 @@
     <Filter Include="源文件\Creature">
       <UniqueIdentifier>{824c0060-c48c-418a-aedf-e951075c2184}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\World">
+      <UniqueIdentifier>{b65564a7-7710-435e-b6c4-5d0de5367484}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,7 +30,7 @@
     <ClCompile Include="Hero.cpp">
       <Filter>源文件\Creature</Filter>
     </ClCompile>
-    <ClCompile Include="Enemie.cpp">
+    <ClCompile Include="Enemy.cpp">
       <Filter>源文件\Creature</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
@@ -35,6 +38,15 @@
     </ClCompile>
     <ClCompile Include="Checkeable.cpp">
       <Filter>源文件\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>源文件\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>源文件\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,13 +56,22 @@
     <ClInclude Include="Hero.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Enemie.h">
+    <ClInclude Include="Enemy.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Checkeable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

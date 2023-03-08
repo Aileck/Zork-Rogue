@@ -7,6 +7,7 @@ Weapon::Weapon(WeaponType type):Checkeable("NOT EQUIPPED", "You are not equippin
 	this->defense = 0;
 	this->speed = 0;
 	this->critical = 0;
+	this->picked = true;
 }
 
 Weapon::Weapon(string name,  string definition, int attack, int defense, int speed, int critical, WeaponType type):
@@ -17,6 +18,8 @@ Weapon::Weapon(string name,  string definition, int attack, int defense, int spe
 	this->speed = speed;
 	this->critical = critical;
 	this->type = type;
+	this->picked = false;
+
 }
 
 void Weapon::BeCheked()
