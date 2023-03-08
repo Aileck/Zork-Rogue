@@ -48,6 +48,9 @@
     <ClCompile Include="World.cpp">
       <Filter>源文件\World</Filter>
     </ClCompile>
+    <ClCompile Include="InputProcessor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature.h">
@@ -72,6 +75,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputProcessor.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

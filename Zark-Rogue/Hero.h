@@ -10,7 +10,6 @@ public:
     virtual void BeCheked();
     void EquipWeapon(Weapon* newWeapon);
 
-
 private:
     int attackWeapon;
     int defenseWeapon;

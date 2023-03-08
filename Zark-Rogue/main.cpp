@@ -1,11 +1,13 @@
 ﻿#include <iostream>
 
+
 #include "World.h"
 #include "Scene.h"
 #include "Creature.h"
 #include "Enemy.h"
 #include "Hero.h"
 #include "Weapon.h"
+#include "InputProcessor.h"
 
 using namespace std;
 
@@ -17,10 +19,12 @@ int main() {
     Weapon* newWeapon = new Weapon("Demon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
     s1->AddWeapon(newWeapon);
 
-    std::cout << "Game start: ";
-    std::string input;
-    std::getline(std::cin, input);
-    std::cout << "You entered: " << input << std::endl;
+    cout << "Game start: ";
+    string input;
+    getline(std::cin, input);
+    InputProcessor::ProcessInput(input,s1);
+
+
 
     //Hero* hero = new Hero();
 
