@@ -25,22 +25,13 @@ Weapon::Weapon(string name,  string definition, int attack, int defense, int spe
 void Weapon::BeCheked()
 {
 	cout << "=== " << GetName() << " ===" << endl;
-	cout << "* " << GetDescription()  << endl;
+	cout << "* " << GetBasicDefinition()  << endl;
 	cout << "* Attack:" << attack << endl;
 	cout << "* Defense:" << defense << endl;
 	cout << "* Speed:" << speed << endl << endl;
 
 }
 
-string Weapon::GetName()
-{
-	return Checkeable::GetName();
-}
-
-string Weapon::GetDescription()
-{
-	return Checkeable::GetBasicDefinition();
-}
 
 int Weapon::GetAttack()
 {

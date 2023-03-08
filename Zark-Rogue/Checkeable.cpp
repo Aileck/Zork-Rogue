@@ -1,7 +1,13 @@
 #include "Checkeable.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 
+Checkeable::Checkeable()
+{
+	this->name = "Nothing";
+	this->definition = "There's nothing here that you're looking for.";
+}
 
 Checkeable::Checkeable(string name, string basicdefinition, bool specialcase)
 {
@@ -20,9 +26,21 @@ void Checkeable::BeCheked()
 {
 }
 
-string Checkeable::GetName()
+
+string Checkeable::GetName(bool lower)
 {
-	return this->name;
+	if (!lower) {
+		return this->name;
+	}
+	else {
+		string lowerName;
+		for (char c : this->name) {
+			if(c != '[' and c != ']')
+				lowerName += tolower(c);
+		}
+		return lowerName;
+	}
+		
 }
 
 string Checkeable::GetBasicDefinition()

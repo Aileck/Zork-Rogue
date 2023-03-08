@@ -9,10 +9,11 @@ using namespace std;
 class Checkeable
 {
 public:
+	Checkeable();
 	Checkeable(string name, string basicdefinition,bool specialcase = false);
 	virtual void BeCheked();
 
-	string GetName();
+	string GetName(bool lower = false);
 	string GetBasicDefinition();
 	int GetCheckTime();
 

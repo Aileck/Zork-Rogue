@@ -1,6 +1,8 @@
 #ifndef ITEM_H
 #define ITEM_H
-class Item
+
+#include "Checkeable.h"
+class Item:public Checkeable
 {
 };
 

@@ -17,8 +17,6 @@ public:
 	Weapon(string name,string definition ,int attack, int defense, int speed, int critical, WeaponType type);
 
 	void BeCheked();
-	string GetName();
-	string GetDescription();
 	int GetAttack();
 	int GetDefense();
 	int GetSpeed();

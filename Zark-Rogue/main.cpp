@@ -14,6 +14,7 @@ using namespace std;
 
 int main() {
     World* w = new World();
+    Hero* hero = new Hero();
 
     Scene* s1 = new Scene("Scene 1","Level 1", 1);
     Weapon* newWeapon = new Weapon("Demon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
@@ -22,7 +23,7 @@ int main() {
     cout << "Game start: ";
     string input;
     getline(std::cin, input);
-    InputProcessor::ProcessInput(input,s1);
+    InputProcessor::ProcessInput(input,s1,hero);
 
 
 

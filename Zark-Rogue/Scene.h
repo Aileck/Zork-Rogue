@@ -16,6 +16,7 @@ public:
 	void AddEnemy(Enemy* enemy);
 	void AddItem(Item* item);
 	void AddWeapon(Weapon* weapon);
+	Checkeable* IfContains(string s);
 
 private:
 	int id;
