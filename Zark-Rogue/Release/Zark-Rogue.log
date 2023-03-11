@@ -1,4 +1,8 @@
-﻿  InputProcessor.cpp
+﻿  Hero.cpp
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Creature.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(5,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+  InputProcessor.cpp
 C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(7,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
 C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(8,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
 C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\creature.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
@@ -19,11 +23,51 @@ C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(8,10): 
 C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(9,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
 C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
 C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(5,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
-C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.cpp(17,23): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.cpp(21,23): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.cpp(14,23): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.cpp(18,23): warning C4018: “<”: 有符号/无符号不匹配
+  Item.cpp
+  Scene.cpp
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(7,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(8,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\creature.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(9,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(10,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(5,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.cpp(78,23): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.cpp(86,23): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.cpp(93,23): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.cpp(107,23): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.cpp(119,23): warning C4018: “<”: 有符号/无符号不匹配
+  Weapon.cpp
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(5,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+  World.cpp
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(6,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(7,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\creature.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(8,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(9,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(5,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(7,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(8,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(9,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(10,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+  main.cpp
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(6,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(7,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\creature.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(8,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Inventory.h(9,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(4,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Weapon.h(5,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(7,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(8,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(9,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\Scene.h(10,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
   正在生成代码
-  26 of 485 functions ( 5.4%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 452 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   已完成代码的生成
   Zark-Rogue.vcxproj -> C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Release\Zark-Rogue.exe

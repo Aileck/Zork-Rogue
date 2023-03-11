@@ -27,3 +27,8 @@ Item::ItemType Item::GetType()
 
     return this->type;
 }
+
+void Item::BePicked()
+{
+    location = INVENTORY;
+}

@@ -31,6 +31,7 @@ public:
 
     void BeCheked();
     ItemType GetType();
+    void BePicked();
 
 protected:
     ItemType type;

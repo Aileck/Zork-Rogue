@@ -8,9 +8,6 @@ string Inventory::ShowAll()
 {
     string out = "You glanced at the item stuck in your belt.";
     out += "\n===Your Inventory===";
-
-    Item* newItem = new Item("1","2",Item::ItemType::Potion);
-    inventoryItems.push_back(newItem);
     
     //Items
     out += "\n*Items:";
@@ -28,4 +25,16 @@ string Inventory::ShowAll()
 
 
     return out;
+}
+
+void Inventory::AddItem(Item* item)
+{
+    item->BePicked();
+    inventoryItems.push_back(item);
+}
+
+void Inventory::AddWeapon(Weapon* weapon)
+{
+    weapon->BePicked();
+    inventoryWeapons.push_back(weapon);
 }
