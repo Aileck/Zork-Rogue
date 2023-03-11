@@ -36,45 +36,48 @@ void Hero::BeCheked() {
     cout << "" << endl;
 }
 
-void Hero::EquipWeapon(Weapon* newWeapon)
+string Hero::EquipWeapon(Weapon* newWeapon)
 {
     Weapon::WeaponType newWeaponType= newWeapon->GetType();
+    string out = "Then you equipped " + newWeapon->GetName() + ".";
     switch (newWeaponType)
     {
     case Weapon::HAND_LEFT:
-        if (this->handLeft->GetName() == "NOT EQUIPPED") {
-            //Destroy no equipped
+        if (this->handLeft->GetName(true) == "not equipped") {
+            out += "\nGreat! You happen to need equip a sword, and then you won't be afraid of the monster in front of you.";
         }
         else {
-            //Unequip 
+            out += "\nAnd put " + this->handLeft->GetName()+ " in your inventory that was in your left hand.";
         }
-        cout << "!Change Left weapon" << endl;
         this->handLeft = newWeapon;
         ChangePowerByWeapon(newWeapon);
         break;
     case Weapon::HAND_RIGHT:
-        if (this->handRight->GetName() == "NOT EQUIPPED") {
+        if (this->handRight->GetName() == "not equipped") {
+            out += "\nGreat! You happen to need equip a shield, that way it's harder for monsters to hurt you..";
+
         }
         else {
-            //Unequip 
+            out += "\nAnd put " + this->handLeft->GetName() + " in your inventory that was in your right hand.";
         }
-        cout << "!Change Right weapon" << endl;
+        out += "\nAnd put " + this->handLeft->GetName() + " in your inventory that was in your left hand.";
         this->handRight = newWeapon;
         ChangePowerByWeapon(newWeapon);
         break;
     case Weapon::FOOT:
-        if (this->foot->GetName() == "NOT EQUIPPED") {
+        if (this->foot->GetName() == "not equipped") {
         }
         else {
-            //Unequip 
+            out += "\nAnd put " + this->handLeft->GetName() + " in your inventory that was in your foot.";
         }
         this->foot = newWeapon;
         ChangePowerByWeapon(newWeapon);
         break;
     default:
-        cout << "New type" << endl;
         break;
     }
+
+    return out;
 }
 
 void Hero::ChangePowerByWeapon(Weapon* newWeapon) {

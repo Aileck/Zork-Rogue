@@ -97,6 +97,30 @@ Checkeable* Scene::IfContains(string target)
     return notfound;
 }
 
+Item* Scene::IfContainsItem(string target)
+{
+    // Item
+    for (int i = 0; i < items.size(); i++) {
+        if (items.at(i)->GetName(true) == target) {
+            return items.at(i);
+        }
+    }
+
+    return new Item();
+}
+
+Weapon* Scene::IfContainsWeapon(string target)
+{
+    // Weapon
+    for (int i = 0; i < weapons.size(); i++) {
+        if (weapons.at(i)->GetName(true) == target) {
+            return weapons.at(i);
+        }
+    }
+
+    return new Weapon();
+}
+
 void Scene::SetConnections(Scene* n, Scene* w, Scene* s, Scene* e, Scene* h)
 {
     //Set 4 connections and a hidden room if exists

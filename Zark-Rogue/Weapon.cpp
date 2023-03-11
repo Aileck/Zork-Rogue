@@ -1,6 +1,10 @@
 #include "Weapon.h"
 
-Weapon::Weapon(WeaponType type):Checkeable("NOT EQUIPPED", "You are not equipping anything in this slot.")
+Weapon::Weapon():Item("NO WEAPON", "NO WEAPON", ItemType::Weapon)
+{
+	this->type = NO_WEAPON;
+}
+Weapon::Weapon(WeaponType type):Item("NOT EQUIPPED", "You are not equipping anything in this slot.", ItemType::Weapon)
 {
 	this->type = type;
 	this->attack = 0;
@@ -11,7 +15,7 @@ Weapon::Weapon(WeaponType type):Checkeable("NOT EQUIPPED", "You are not equippin
 }
 
 Weapon::Weapon(string name,  string definition, int attack, int defense, int speed, int critical, WeaponType type):
-	Checkeable(name, definition)
+	Item(name, definition, ItemType::Weapon)
 {
 	this->attack = attack;
 	this->defense = defense;

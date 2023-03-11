@@ -2,17 +2,20 @@
 #define WEAPON_H
 
 #include "Checkeable.h";
+#include "Item.h";
 
 using namespace std;
 
-class Weapon:public Checkeable
+class Weapon:public Item
 {
 public:
 	enum WeaponType {
 		HAND_LEFT,
 		HAND_RIGHT,
-		FOOT
+		FOOT,
+		NO_WEAPON
 	};
+	Weapon();
 	Weapon(WeaponType type);
 	Weapon(string name,string definition ,int attack, int defense, int speed, int critical, WeaponType type);
 

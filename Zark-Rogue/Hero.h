@@ -8,7 +8,7 @@ class Hero : public Creature {
 public:
     Hero();
     virtual void BeCheked();
-    void EquipWeapon(Weapon* newWeapon);
+    string EquipWeapon(Weapon* newWeapon);
 
 private:
     int attackWeapon;

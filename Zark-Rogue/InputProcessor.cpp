@@ -36,7 +36,7 @@ bool InputProcessor::ProcessInput(string input, World* world)
         switch (actiontype)
         {
             case InputProcessor::CHECK:
-                Check(world->GetCurrentScene(), target);
+                Check(world, target);
                 break;
             case InputProcessor::GOTO:
                 destiny = Goto(world->GetCurrentScene(), target);
@@ -98,9 +98,24 @@ InputProcessor::InputType InputProcessor::InputToAction(string s)
     return NOTREGISTERED;
 }
 
-void InputProcessor::Check(Scene* s, string target)
+void InputProcessor::Check(World* w, string target)
 {
-    Checkeable* c = s->IfContains(target);
+    if (target.length() == 0) {
+        cout << "What do you want to check? " << endl;
+        cout << "You can check anything enclosed in square brackets[]" << endl;
+        cout << "Alternatively, you can check [hero] or [me] check your stats, or check [here] to observe the scene." << endl;
+        return;
+    }
+    if (target == "me" || target == "hero") {
+        w->GetHero()->BeCheked();
+        return;
+    }
+    if (target == "here" ) {
+        w->GetCurrentScene()->BeCheked();
+        return;
+    }
+
+    Checkeable* c = w->GetCurrentScene()->IfContains(target);
     if (c->GetName() == "Nothing") {
         cout << "There's no *" + target + "* here that you're looking for." << endl;
     }
@@ -131,15 +146,17 @@ int InputProcessor::Goto(Scene* s, string target) {
     if (targetScene == -1) {
         cout << "The *" + target + "* direction does not exist.You can try going east, south, west, or north." << endl;
     }
-    else if (targetScene == 0) {
-        cout << "It appears that there is no road in *" + target + "* " + hint + " you are trying to go.Perhaps you could try a different direction?" << endl;
-    }
     else {
-        if (target != "hidden")
+        if (target == "hidden")
+            cout << "You start to look for a *hidden* passage. " << endl;
+
+        else if (targetScene == 0) {
+            cout << "It appears that there is no road in *" + target + "* " + hint + " you are trying to go. Perhaps you could try a different direction?" << endl;
+        }
+
+        else if (target != "hidden")
             cout << "You are trying to move towards *" + target + "* " + hint + "." << endl;
 
-        if (target == "hidden")
-            cout << "You start to look for a * hidden * passage. " << endl;
     }
     cout << endl;
 
@@ -148,7 +165,34 @@ int InputProcessor::Goto(Scene* s, string target) {
 
 void InputProcessor::Use(World * w, string target)
 {
-    //Search scene
-     
+    Item* searchedItem = new Item();
+    Weapon* searchedWeapon = new Weapon();
+    
+    //Serarch order Scene Item -> Scene Weapon -> Inventory item -> Inventory weapon
+
+    //Search scene item
+    searchedItem = w->GetCurrentScene()->IfContainsItem(target);
+
+    if (searchedItem->GetType() == Item::ItemType::NO_ITEM) {
+        //Search scene weapon
+        searchedWeapon = w->GetCurrentScene()->IfContainsWeapon(target);
+        if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
+            //Case: cannot find anything
+            cout << "Cannot find the *" + target + " you want to use." << endl;
+            cout << "If it is in your inventory, use the command 'Use my " + target << endl;
+        }
+        else {
+            //Case: Find a weapon
+            string message = w->GetHero()->EquipWeapon(searchedWeapon);
+            cout << "You picked up *"+ target +"* on the ground." << endl;
+            cout << message << endl;
+        }
+    }
+    else {
+        //Case: Find a item
+    }
+
+
+
      //Search inventory
 }

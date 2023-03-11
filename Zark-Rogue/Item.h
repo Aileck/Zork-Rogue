@@ -4,22 +4,26 @@
 #include "Checkeable.h"
 
 /*
-Only 3 items
+Only 4 items
  - Health potion
  - Map
  - Key
+ - Weapon
 */
 
 class Item :public Checkeable
 {
 public:
-    Item(string name, string description);
     enum ItemType {
         Potion,
         Map,
         Key,
-        Weapon
+        Weapon,
+        NO_ITEM
     };
+    Item();
+    Item(string name, string description, ItemType type);
+
     void BeCheked();
     ItemType GetType();
 

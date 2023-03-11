@@ -24,6 +24,8 @@ public:
     bool isHidden();
     void SetConnections(Scene* n, Scene* w, Scene* s, Scene* e, Scene* h);
     Checkeable* IfContains(string target);
+    Item* IfContainsItem(string target);
+    Weapon* IfContainsWeapon(string target);
     int CheckDestination(string target);
 
     void BeCheked();
