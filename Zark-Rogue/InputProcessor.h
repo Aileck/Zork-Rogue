@@ -41,6 +41,7 @@ private:
 	static int GotoAction(Scene* s, string target);
 	static void InventoryAciton(World* w);
 	static void UseAction(World* w, string target);
+	static void PickAciton(World* w, string target);
 };
 
 #endif

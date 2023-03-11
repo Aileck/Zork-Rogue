@@ -56,6 +56,7 @@ bool InputProcessor::ProcessInput(string input, World* world)
                 UseAction(world, target);
                 break;
             case InputProcessor::PICK:
+                PickAciton(world,target);
                 break;
             case InputProcessor::HELP:
                 break;
@@ -203,4 +204,45 @@ void InputProcessor::UseAction(World * w, string target)
 
 
      //Search inventory
+}
+
+void InputProcessor::PickAciton(World* w, string target)
+{
+    Item* searchedItem = new Item();
+    Weapon* searchedWeapon = new Weapon();
+
+    cout << "You are trying to search *" + target + "* on the ground." << endl;
+
+    if (target == "money") {
+        cout << "I understand that many people would like to pick up money in the dungeon." << endl;
+        cout << "but unfortunately, there is no money to be found here." << endl;
+        cout << "Moreover, there are no shops to be found here either." << endl;
+
+        return;
+    }
+    else if (target.length() == 0) {
+        cout << "You casually glanced at the ground, but didn't know what you wanted to pick up." << endl;
+    }
+
+    //Search scene item
+    searchedItem = w->GetCurrentScene()->IfContainsItem(target);
+
+    if (searchedItem->GetType() == Item::ItemType::NO_ITEM) {
+        //Search scene weapon
+        searchedWeapon = w->GetCurrentScene()->IfContainsWeapon(target);
+        if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
+            //Case: cannot find anything
+            cout << "But cannot find the *" + target + "* you want to pick." << endl;
+        }
+        else {
+            //Case: Find a weapon
+            w->GetInventory()->AddWeapon(searchedWeapon);
+            cout << "You picked up *" + target + "* on the ground." << endl;
+        }
+    }
+    else {
+        //Case: Find a item
+        w->GetInventory()->AddItem(searchedItem);
+        cout << "You picked up *" + target + "* on the ground." << endl;
+    }
 }
