@@ -22,7 +22,7 @@ Valid input:
 class InputProcessor
 {
 public:
-	static bool ProcessInput(string input, Scene* scene, Hero* hero);
+	static bool ProcessInput(string input, World* w);
 	enum InputType {
 		CHECK,
 		GOTO,
@@ -36,8 +36,10 @@ public:
 	};
 
 private:
-	static InputType InputToType(string s);
+	static InputType InputToAction(string s);
 	static void Check(Scene* s, string target);
+	static int Goto(Scene* s, string target);
+	static void Use(World* w, string target);
 };
 
 #endif

@@ -24,6 +24,7 @@ Checkeable::Checkeable(string name, string basicdefinition, bool specialcase)
 
 void Checkeable::BeCheked()
 {
+	this->checktime++;
 }
 
 

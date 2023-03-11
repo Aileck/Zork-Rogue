@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "Hero.h"
 #include "Scene.h"
 /* World map
 * Scene 0 = no route
@@ -19,14 +20,19 @@
 class World
 {
 public:
-	World();
-	void AddScene(Scene* s);
-	void GotoScene(int sceneid);
-	Scene* GetCurrentScene();
+    World();
+    void AddFirstScene(Scene* s);
+    void AddScene(Scene* s);
+    void GotoScene(int sceneid);
+    Scene* GetCurrentScene();
+    Hero* GetHero();
+
 private:
-	int actualScene;
-	vector <Scene*> scenes;
+    int actualScene;
+    Hero* hero;
+    vector<Scene*> scenes;
 };
+
 
 #endif
 

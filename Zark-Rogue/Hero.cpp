@@ -39,7 +39,6 @@ void Hero::BeCheked() {
 void Hero::EquipWeapon(Weapon* newWeapon)
 {
     Weapon::WeaponType newWeaponType= newWeapon->GetType();
-    cout << newWeapon->GetType() << endl;
     switch (newWeaponType)
     {
     case Weapon::HAND_LEFT:

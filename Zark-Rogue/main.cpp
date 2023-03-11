@@ -1,5 +1,7 @@
 ﻿#include <iostream>
-
+#include <string>
+#include <vector>
+#include <Windows.h>
 
 #include "World.h"
 #include "Scene.h"
@@ -14,35 +16,24 @@ using namespace std;
 
 int main() {
     World* w = new World();
-    Hero* hero = new Hero();
+    while (true) {
+        cout << endl;
+        //cout << "Available actions: {Check}{Goto}{Attack}{Talk}{Inventory}{Use}{Pick}{Help}" << endl;
+        cout << "---------------------------- Your next action ----------------------------" << endl;
+        cout << "> ";
 
-    Scene* s1 = new Scene("Scene 1","Level 1", 1);
-    Weapon* newWeapon = new Weapon("Demon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
-    s1->AddWeapon(newWeapon);
+        //Set gree to user input
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+        string input;
+        getline(std::cin, input);
 
-    cout << "Game start: ";
-    string input;
-    getline(std::cin, input);
-    InputProcessor::ProcessInput(input,s1,hero);
+        //Restore color
+        SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        cout << "--------------------------------------------------------------------------" << endl;
+        cout << endl;
+        InputProcessor::ProcessInput(input, w);
+    }
 
-
-
-    //Hero* hero = new Hero();
-
-    //hero->BeCheked();  
-
-    //
-    //Weapon* newWeapon2 = new Weapon("Demon Shield", "Bad", 200, 900, 0, 5, Weapon::HAND_RIGHT);
-    //Weapon* newWeapon3 = new Weapon("Demon Shadow", "Normal", 200, 900, 10, 5, Weapon::FOOT);
-
-    //newWeapon->BeCheked();
-    //newWeapon2->BeCheked();
-
-    //hero->EquipWeapon(newWeapon);
-    //hero->EquipWeapon(newWeapon2);
-    //hero->EquipWeapon(newWeapon3);
-    //cout << "Change" << endl;
-
-    //hero->BeCheked();
     return 0;
 }
