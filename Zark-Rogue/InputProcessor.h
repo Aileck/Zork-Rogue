@@ -37,9 +37,10 @@ public:
 
 private:
 	static InputType InputToAction(string s);
-	static void Check(World* w, string target);
-	static int Goto(Scene* s, string target);
-	static void Use(World* w, string target);
+	static void CheckAction(World* w, string target);
+	static int GotoAction(Scene* s, string target);
+	static void InventoryAciton(World* w);
+	static void UseAction(World* w, string target);
 };
 
 #endif

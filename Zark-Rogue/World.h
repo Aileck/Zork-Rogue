@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "Inventory.h"
 #include "Hero.h"
 #include "Scene.h"
 /* World map
@@ -26,11 +27,13 @@ public:
     void GotoScene(int sceneid);
     Scene* GetCurrentScene();
     Hero* GetHero();
+    Inventory* GetInventory();
 
 private:
     int actualScene;
     Hero* hero;
     vector<Scene*> scenes;
+    Inventory* inventory;
 };
 
 

@@ -36,10 +36,10 @@ bool InputProcessor::ProcessInput(string input, World* world)
         switch (actiontype)
         {
             case InputProcessor::CHECK:
-                Check(world, target);
+                CheckAction(world, target);
                 break;
             case InputProcessor::GOTO:
-                destiny = Goto(world->GetCurrentScene(), target);
+                destiny = GotoAction(world->GetCurrentScene(), target);
                 if (destiny > 0) {
                     world->GotoScene(destiny);
                     
@@ -50,9 +50,10 @@ bool InputProcessor::ProcessInput(string input, World* world)
             case InputProcessor::TALK:
                 break;
             case InputProcessor::INVENTORY:
+                InventoryAciton(world);
                 break;
             case InputProcessor::USE:
-                Use(world, target);
+                UseAction(world, target);
                 break;
             case InputProcessor::PICK:
                 break;
@@ -98,7 +99,7 @@ InputProcessor::InputType InputProcessor::InputToAction(string s)
     return NOTREGISTERED;
 }
 
-void InputProcessor::Check(World* w, string target)
+void InputProcessor::CheckAction(World* w, string target)
 {
     if (target.length() == 0) {
         cout << "What do you want to check? " << endl;
@@ -121,7 +122,7 @@ void InputProcessor::Check(World* w, string target)
     }
     
 }
-int InputProcessor::Goto(Scene* s, string target) {
+int InputProcessor::GotoAction(Scene* s, string target) {
     string hint = "";
     if (target == "n") {
         hint = "(north)";
@@ -163,7 +164,13 @@ int InputProcessor::Goto(Scene* s, string target) {
     return targetScene;
 }
 
-void InputProcessor::Use(World * w, string target)
+void InputProcessor::InventoryAciton(World* w)
+{
+    string out = w->GetInventory()->ShowAll();
+    cout << out << endl;
+}
+
+void InputProcessor::UseAction(World * w, string target)
 {
     Item* searchedItem = new Item();
     Weapon* searchedWeapon = new Weapon();

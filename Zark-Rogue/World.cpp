@@ -6,6 +6,8 @@ World::World()
     Scene* s0 = new Scene();
     AddScene(s0);
     hero = new Hero();
+    inventory = new Inventory();
+    inventory->ShowAll();
 
     Scene* s1 = new Scene("Scene 1", "Level 1", 1);
     Scene* sn = new Scene("Scene N", "Level N", 2);
@@ -66,4 +68,9 @@ Scene* World::GetCurrentScene()
 Hero * World::GetHero()
 {
     return this->hero;
+}
+
+Inventory* World::GetInventory()
+{
+    return this->inventory;
 }

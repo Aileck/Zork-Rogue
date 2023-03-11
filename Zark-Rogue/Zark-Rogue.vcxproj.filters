@@ -51,6 +51,9 @@
     <ClCompile Include="InputProcessor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature.h">
@@ -78,6 +81,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="InputProcessor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
