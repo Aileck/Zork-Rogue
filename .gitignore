@@ -35,3 +35,6 @@
 ipch/
 *.opendb
 *.opensdf
+.vs/Zark-Rogue/v16/Browse.VC.db
+.vs/Zark-Rogue/v16/Browse.VC.db-shm
+Zark-Rogue/Release/Zark-Rogue.tlog/unsuccessfulbuild
