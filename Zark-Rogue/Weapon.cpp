@@ -1,28 +1,26 @@
 #include "Weapon.h"
 
-Weapon::Weapon():Item("NO WEAPON", "NO WEAPON", ItemType::Weapon)
+Weapon::Weapon():Item("NO WEAPON", "NO WEAPON", ItemType::WEAPON)
 {
 	this->type = NO_WEAPON;
 }
-Weapon::Weapon(WeaponType type):Item("NOT EQUIPPED", "You are not equipping anything in this slot.", ItemType::Weapon)
+Weapon::Weapon(WeaponType type):Item("NOT EQUIPPED", "You are not equipping anything in this slot.", ItemType::WEAPON)
 {
 	this->type = type;
 	this->attack = 0;
 	this->defense = 0;
 	this->speed = 0;
 	this->critical = 0;
-	this->picked = true;
 }
 
 Weapon::Weapon(string name,  string definition, int attack, int defense, int speed, int critical, WeaponType type):
-	Item(name, definition, ItemType::Weapon)
+	Item(name, definition, ItemType::WEAPON)
 {
 	this->attack = attack;
 	this->defense = defense;
 	this->speed = speed;
 	this->critical = critical;
 	this->type = type;
-	this->picked = false;
 
 }
 
@@ -34,6 +32,11 @@ void Weapon::BeCheked()
 	cout << "* Defense:" << defense << endl;
 	cout << "* Speed:" << speed << endl << endl;
 
+}
+
+void Weapon::BeEquiped()
+{
+	this->location = INVENTORY;
 }
 
 

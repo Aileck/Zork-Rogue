@@ -38,7 +38,8 @@ void Hero::BeCheked() {
 
 string Hero::EquipWeapon(Weapon* newWeapon)
 {
-    Weapon::WeaponType newWeaponType= newWeapon->GetType();
+    newWeapon->BeEquiped();
+    Weapon::WeaponType newWeaponType = newWeapon->GetType();
     string out = "Then you equipped " + newWeapon->GetName() + ".";
     switch (newWeaponType)
     {

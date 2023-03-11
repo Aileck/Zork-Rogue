@@ -178,12 +178,13 @@ void InputProcessor::Use(World * w, string target)
         searchedWeapon = w->GetCurrentScene()->IfContainsWeapon(target);
         if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
             //Case: cannot find anything
-            cout << "Cannot find the *" + target + " you want to use." << endl;
-            cout << "If it is in your inventory, use the command 'Use my " + target << endl;
+            cout << "Cannot find the *" + target + "* you want to use." << endl;
+            cout << "If it is in your inventory, use the command 'use my " + target + "'." << endl;
         }
         else {
             //Case: Find a weapon
             string message = w->GetHero()->EquipWeapon(searchedWeapon);
+            
             cout << "You picked up *"+ target +"* on the ground." << endl;
             cout << message << endl;
         }

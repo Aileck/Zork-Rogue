@@ -20,6 +20,7 @@ public:
 	Weapon(string name,string definition ,int attack, int defense, int speed, int critical, WeaponType type);
 
 	void BeCheked();
+	void BeEquiped();
 	int GetAttack();
 	int GetDefense();
 	int GetSpeed();
@@ -33,8 +34,6 @@ private:
 	int defense;
 	int speed;
 	int critical;
-	bool picked;
-
 };
 
 #endif

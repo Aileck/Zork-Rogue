@@ -2,11 +2,18 @@
 
 Item::Item() :Checkeable("NO ITEM","NO ITEM") {
     this->type = NO_ITEM;
+    this->location = CONSUMED;
 }
 
-Item::Item(string name, string description, ItemType type):Checkeable(name, description)
+Item::Item(string name, string description, ItemType type, bool inFloor):Checkeable(name, description)
 {
     this->type = type;
+    if (inFloor) {
+        this->location = FLOOR;
+    }
+    else {
+        this->location = INVENTORY;
+    }
 }
 
 void Item::BeCheked()
@@ -17,5 +24,6 @@ void Item::BeCheked()
 
 Item::ItemType Item::GetType()
 {
+
     return this->type;
 }

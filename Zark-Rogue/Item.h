@@ -16,19 +16,25 @@ class Item :public Checkeable
 public:
     enum ItemType {
         Potion,
-        Map,
-        Key,
-        Weapon,
+        MAP,
+        KEY,
+        WEAPON,
         NO_ITEM
     };
+    enum ItemLocation {
+        FLOOR,
+        INVENTORY,
+        CONSUMED,
+    };
     Item();
-    Item(string name, string description, ItemType type);
+    Item(string name, string description, ItemType type, bool inFLoor = true);
 
     void BeCheked();
     ItemType GetType();
 
-private:
+protected:
     ItemType type;
+    ItemLocation location;
 };
 
 

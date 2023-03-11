@@ -44,6 +44,10 @@ void Scene::AddWeapon(Weapon* weapon)
     weapons.push_back(weapon);
 }
 
+void Scene::RemoveItem(Item* item)
+{
+}
+
 
 void Scene::SetLock(bool ifIsLocked)
 {
@@ -114,7 +118,9 @@ Weapon* Scene::IfContainsWeapon(string target)
     // Weapon
     for (int i = 0; i < weapons.size(); i++) {
         if (weapons.at(i)->GetName(true) == target) {
-            return weapons.at(i);
+            Weapon* copy = weapons.at(i);
+            weapons.erase(weapons.begin()+(i));
+            return copy;
         }
     }
 

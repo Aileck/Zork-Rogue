@@ -18,6 +18,8 @@ public:
     void AddEnemy(Enemy* enemy);
     void AddItem(Item* item);
     void AddWeapon(Weapon* weapon);
+    void RemoveItem(Item* item);
+    void RemoveWeapon(Weapon* weapon);
     void SetLock(bool ifIsLocked);
     void SetHidden(bool ifIsHidden);
     bool isLocked();
