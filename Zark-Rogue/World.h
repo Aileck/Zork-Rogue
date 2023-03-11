@@ -31,6 +31,7 @@ private:
     int actualScene;
     Hero* hero;
     vector<Scene*> scenes;
+    Inventory inventory;
 };
 
 
