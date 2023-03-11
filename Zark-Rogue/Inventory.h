@@ -12,11 +12,12 @@ class Inventory
 {
 public:
 	Inventory();
-	void ShowAll();
+	string ShowAll();
 private:
 	vector<Item*> inventoryItems;
 	vector<Weapon*> inventoryWeapons;
 };
+
 
 #endif
 
