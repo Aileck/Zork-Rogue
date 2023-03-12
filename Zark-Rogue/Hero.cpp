@@ -22,7 +22,7 @@ void Hero::BeCheked() {
     string speedByWeapon = (this->attackWeapon <= 0) ? "" : " + (" + std::to_string(this->attackWeapon) + ")";
 
     cout << "=== " << Checkeable::GetName() << " ===" << endl;
-    cout << "=== " << this->curentHP << "/" << this->maxHp << " ===" << endl;
+    cout << "=== " << this->curentHP << " ===" << endl;
     cout << "* " << "Attack: " << this->attack  << attackByWeapon << endl; 
     cout << "* " << "Defense: " << this->attack << defenseByWeapon << endl;
     cout << "* " << "Speed: " << this->attack << speedByWeapon << endl;
@@ -31,7 +31,6 @@ void Hero::BeCheked() {
     cout << "* " << "Sword: " << handLeft->GetName() << " attack +" << handLeft->GetAttack() << endl;
     cout << "* " << "Shield: " << handRight -> GetName() << " defense +" << handRight ->GetDefense() << endl;
     cout << "* " << "Foot: " << foot -> GetName() << " speed +" << foot->GetSpeed() << endl;
-
 
     cout << "" << endl;
 }
@@ -80,6 +79,60 @@ string Hero::EquipWeapon(Weapon* newWeapon)
 
     return out;
 }
+
+string Hero::UseItem(Item* item)
+{
+    string out = "You tried to ";
+    string map = "\n";
+
+    switch (item->GetType())
+    {
+    case Item::ItemType::Potion:
+        out += "drink the *potion*";
+        //Could contruct another class or struct, to simplify project, i decided to add hp directly
+        this->curentHP += 30;
+        out += "\nYou feel more energetic. \And at the moment you finished drinking the potion, the empty bottle disappeared.";
+        item->BeConsumed();
+        break;
+    case Item::ItemType::BOTTLE:
+        out += "fill the empty *bottle*, but there is nothing to put it in.";
+        break;
+    case Item::ItemType::MAP:
+
+        out += "unfold the *map*.";
+
+
+            map += "     [2] [H8]\n";
+            map += "     | |/    \n";
+            map += "[L3]=[1]=[4]=[6]  \n";
+            map += "| |  | | | | \n";
+            map += "[L9] [5] [H10]   \n";
+            map += "     | |   \n";
+            map += "     [E7]  \n";
+        out += map;
+        out += "\nMap symbol:";
+        out += "\n\tNumber: Room ID";
+        out += "\n\tH: Hidden Room";
+        out += "\n\tL: Locked Room";
+        out += "\n\tO: Exit Room";
+        out += "\nYou can use the '{go}to {h}idden' command to go there before the location of the hidden room.";
+        out += "\nYou can use the '{go}to {e}xit' command to beat the dungeon.";
+        out += "\nYou can use the '{u}se key direction' command to go open locked roor.";
+
+        break;
+    case Item::ItemType::KEY:
+        out += "the *key*";
+        break;
+    case Item::ItemType::WEAPON:
+        out += "this is an errrrrrrrrrrrro";
+        break;
+    default:
+        break;
+    }
+
+    return out;
+}
+
 
 void Hero::ChangePowerByWeapon(Weapon* newWeapon) {
     this->attackWeapon += newWeapon->GetAttack();

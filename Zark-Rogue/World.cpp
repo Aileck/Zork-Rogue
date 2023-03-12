@@ -7,7 +7,8 @@ World::World()
     AddScene(s0);
     hero = new Hero();
     inventory = new Inventory();
-    inventory->ShowAll();
+    Item* map = new Item("Map", "Map", Item::ItemType::MAP);
+    Item* potion = new Item("Potion", "Potion", Item::ItemType::Potion);
 
     Scene* s1 = new Scene("Scene 1", "Level 1", 1);
     Scene* sn = new Scene("Scene N", "Level N", 2);
@@ -20,6 +21,8 @@ World::World()
 
     Weapon* newWeapon = new Weapon("Demon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
     s1->AddWeapon(newWeapon);
+    s1->AddItem(map);
+    s1->AddItem(potion);
     AddFirstScene(s1);
     AddScene(sn);
     AddScene(sw);

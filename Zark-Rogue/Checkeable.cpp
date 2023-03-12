@@ -53,3 +53,9 @@ int Checkeable::GetCheckTime()
 {
 	return this->checktime;
 }
+
+void Checkeable::SetNameAndDefinition(string name, string definition)
+{
+	this->name = "[" + name + "]";
+	this->definition = definition;
+}

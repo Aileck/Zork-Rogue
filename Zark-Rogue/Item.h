@@ -1,13 +1,13 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-#include "World.h"
 #include "Checkeable.h"
 
 
 /*
 Only 4 items
  - Health potion
+ - Bottle
  - Map
  - Key
  - Weapon
@@ -18,6 +18,7 @@ class Item :public Checkeable
 public:
     enum ItemType {
         Potion,
+        BOTTLE,
         MAP,
         KEY,
         WEAPON,
@@ -36,7 +37,7 @@ public:
     void BePicked();
     void BeDropped();
     void BeConsumed();
-    string BeUsed(World w);
+    //string BeUsed(Hero* h);
 
 protected:
     ItemType type;

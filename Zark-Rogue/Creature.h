@@ -12,7 +12,6 @@ public:
     virtual void BeCheked();
 
 protected:
-    int maxHp;
     int curentHP;
     int attack;
     int defense;

@@ -40,31 +40,32 @@ void Item::BeDropped(){
 
 void Item::BeConsumed()
 {
-    location = CONSUMED;
+    this->SetNameAndDefinition("Bottle", "It was a potion, but you've already finished drinking it. Maybe you can drop it.");
+    this->type = BOTTLE;
 }
 
-string Item::BeUsed(World w)
-{
-    string out = "You tried to the ";
-
-    switch (this->type)
-    {
-    case Potion:
-        out += "the *potion*";
-
-        break;
-    case MAP:
-        out += "the *map*";
-        break;
-    case KEY:
-        out += "the *key*";
-        break;
-    case WEAPON:
-        out += "this is an errrrrrrrrrrrro";
-        break;
-    default:
-        break;
-    }
-
-    return out;
-}
+//string Item::BeUsed(World w)
+//{
+//    string out = "You tried to the ";
+//
+//    switch (this->type)
+//    {
+//    case Potion:
+//        out += "the *potion*";
+//
+//        break;
+//    case MAP:
+//        out += "the *map*";
+//        break;
+//    case KEY:
+//        out += "the *key*";
+//        break;
+//    case WEAPON:
+//        out += "this is an errrrrrrrrrrrro";
+//        break;
+//    default:
+//        break;
+//    }
+//
+//    return out;
+//}

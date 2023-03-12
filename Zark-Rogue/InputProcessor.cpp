@@ -42,7 +42,6 @@ bool InputProcessor::ProcessInput(string input, World* world)
                 destiny = GotoAction(world->GetCurrentScene(), target);
                 if (destiny > 0) {
                     world->GotoScene(destiny);
-                    
                 }
                 break;
             case InputProcessor::ATTACK:
@@ -206,6 +205,11 @@ void InputProcessor::UseAction(World * w, string target)
     }
     else {
         //Case: Find a item
+        string out = w->GetHero()->UseItem(searchedItem);
+        cout << out << endl;
+        if (searchedItem->GetType() == Item::ItemType::MAP) {
+            cout << "Your current location: Roon number " + to_string(w->GetCurrentScene()->GetSceneID()) << endl;
+        }
     }
 
 
