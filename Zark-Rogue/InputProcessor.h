@@ -31,6 +31,7 @@ public:
 		INVENTORY,
 		USE,
 		PICK,
+		DROP,
 		HELP,
 		NOTREGISTERED
 	};
@@ -42,6 +43,7 @@ private:
 	static void InventoryAciton(World* w);
 	static void UseAction(World* w, string target);
 	static void PickAciton(World* w, string target);
+	static void DropAciton(World* w, string target);
 };
 
 #endif

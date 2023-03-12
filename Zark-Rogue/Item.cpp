@@ -32,3 +32,12 @@ void Item::BePicked()
 {
     location = INVENTORY;
 }
+
+void Item::BeDropped(){
+    location = FLOOR;
+}
+
+void Item::BeConsumed()
+{
+    location = CONSUMED;
+}

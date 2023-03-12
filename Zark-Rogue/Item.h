@@ -24,7 +24,7 @@ public:
     enum ItemLocation {
         FLOOR,
         INVENTORY,
-        CONSUMED,
+        CONSUMED
     };
     Item();
     Item(string name, string description, ItemType type, bool inFLoor = true);
@@ -32,6 +32,8 @@ public:
     void BeCheked();
     ItemType GetType();
     void BePicked();
+    void BeDropped();
+    void BeConsumed();
 
 protected:
     ItemType type;

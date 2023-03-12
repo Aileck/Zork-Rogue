@@ -13,9 +13,10 @@ public:
 		HAND_LEFT,
 		HAND_RIGHT,
 		FOOT,
-		NO_WEAPON
+		NO_WEAPON,
+		EQUIPPED_ERROR
 	};
-	Weapon();
+	Weapon(bool isNoWeaponError = true);
 	Weapon(WeaponType type);
 	Weapon(string name,string definition ,int attack, int defense, int speed, int critical, WeaponType type);
 
@@ -26,9 +27,12 @@ public:
 	int GetSpeed();
 	int GetCritical();
 	WeaponType GetType();
+	bool GetEquippedError();
+	bool GetEquipped();
 	
 
 private:
+	bool equipped;
 	WeaponType type;
 	int attack;
 	int defense;
