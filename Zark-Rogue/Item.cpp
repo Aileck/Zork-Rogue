@@ -1,5 +1,6 @@
 #include "Item.h"
 
+
 Item::Item() :Checkeable("NO ITEM","NO ITEM") {
     this->type = NO_ITEM;
     this->location = CONSUMED;
@@ -40,4 +41,30 @@ void Item::BeDropped(){
 void Item::BeConsumed()
 {
     location = CONSUMED;
+}
+
+string Item::BeUsed(World w)
+{
+    string out = "You tried to the ";
+
+    switch (this->type)
+    {
+    case Potion:
+        out += "the *potion*";
+
+        break;
+    case MAP:
+        out += "the *map*";
+        break;
+    case KEY:
+        out += "the *key*";
+        break;
+    case WEAPON:
+        out += "this is an errrrrrrrrrrrro";
+        break;
+    default:
+        break;
+    }
+
+    return out;
 }

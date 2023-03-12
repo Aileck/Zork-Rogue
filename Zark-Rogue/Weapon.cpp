@@ -5,6 +5,9 @@ Weapon::Weapon(bool isNoWeaponError):Item("NO WEAPON", "NO WEAPON", ItemType::WE
 	if (!isNoWeaponError) {
 		this->type = EQUIPPED_ERROR;
 	}
+	else {
+		this->type = NO_WEAPON;
+	}
 
 }
 Weapon::Weapon(WeaponType type):Item("NOT EQUIPPED", "You are not equipping anything in this slot.", ItemType::WEAPON)

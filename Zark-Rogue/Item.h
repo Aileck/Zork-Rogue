@@ -1,7 +1,9 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include "World.h"
 #include "Checkeable.h"
+
 
 /*
 Only 4 items
@@ -34,6 +36,7 @@ public:
     void BePicked();
     void BeDropped();
     void BeConsumed();
+    string BeUsed(World w);
 
 protected:
     ItemType type;

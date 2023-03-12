@@ -197,6 +197,7 @@ void InputProcessor::UseAction(World * w, string target)
         }
         else {
             //Case: Find a weapon
+            w->GetInventory()->AddWeapon(searchedWeapon);
             string message = w->GetHero()->EquipWeapon(searchedWeapon);
             
             cout << "You picked up *"+ target +"* on the ground." << endl;
@@ -283,7 +284,7 @@ void InputProcessor::DropAciton(World* w, string target)
         }
         else {
             //Case: Find a weapon
-            cout << "You dropped "+ target +" on the ground." << endl;
+            cout << "You dropped *"+ target +"* on the ground." << endl;
         }
     }
     else {

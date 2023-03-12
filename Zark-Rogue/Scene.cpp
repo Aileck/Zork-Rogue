@@ -8,9 +8,25 @@ Scene::Scene():Checkeable("No way", "No way")
 
 void Scene::BeCheked() {
 	Checkeable::BeCheked();
-	if (this->GetCheckTime() == 1) {
-		cout << GetBasicDefinition() << endl;
-	}
+    string out = "You glanced at the item stuck in your belt.";
+    out += "\n===Scene===";
+
+    //Items
+    out += "\n*Items:";
+    for (int i = 0; i < items.size(); i++) {
+        out += "\n\t* " + items.at(i)->GetName();
+    }
+    out += "\n*Weapons:";
+    for (int i = 0; i < weapons.size(); i++) {
+        out += "\n\t* " + weapons.at(i)->GetName();
+    }
+
+    if (weapons.size() > 2) {
+        out += "\nYou couldn't help but marvel at how many things you could fit on your belt.";
+    }
+
+
+    cout << out << endl;
 }
 
 Scene::Scene(string name, string definition, int id) :Checkeable(name, definition)
