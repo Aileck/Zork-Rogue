@@ -76,6 +76,7 @@ Weapon* Inventory::IfContainsWeaponAndDrop(string target, Scene* scene)
                 return new Weapon(false);
             }
             inventoryWeapons.erase(inventoryWeapons.begin() + (i));
+            scene->AddWeapon(copy);
             return copy;
         }
     }

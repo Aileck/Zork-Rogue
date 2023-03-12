@@ -10,7 +10,6 @@
 //}
 
 Creature::Creature(string name, string definition, int hp, int attack, int defense, int speed):Checkeable(name,definition) {
-    this->maxHp = hp;
     this->curentHP = hp;
     this->attack = attack;
     this->defense = defense;
@@ -19,7 +18,7 @@ Creature::Creature(string name, string definition, int hp, int attack, int defen
 
 void Creature::BeCheked() {
     cout << "=== " << Checkeable::GetName() << " ===" << endl;
-    cout << "=== " << this->curentHP << "/" << this->maxHp << " ===" << endl;
+    cout << "=== " << this->curentHP << " ===" << endl;
     cout << "* " << "Attack: "<< this->attack << endl;
     cout << "* " << "Defense: " << this->attack  << endl;
     cout << "* " << "Speed: " << this->attack  << endl;

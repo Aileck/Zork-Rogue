@@ -16,6 +16,8 @@ public:
 	string GetName(bool lower = false);
 	string GetBasicDefinition();
 	int GetCheckTime();
+	void SetNameAndDefinition(string name, string definition);
+
 
 private:
 		string name;
