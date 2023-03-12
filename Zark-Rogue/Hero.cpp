@@ -91,14 +91,22 @@ string Hero::UseItem(Item* item)
         out += "drink the *potion*";
         //Could contruct another class or struct, to simplify project, i decided to add hp directly
         this->curentHP += 30;
-        out += "\nYou feel more energetic. \And at the moment you finished drinking the potion, the empty bottle disappeared.";
+        out += "\nYou feel more energetic. ";
+            
+        if (item->GetLocation() == Item::ItemLocation::FLOOR) {
+            out += "\n\nAnd at the moment you finished drinking the potion, the empty bottle disappeared.";
+        }
+        if (item->GetLocation() == Item::ItemLocation::INVENTORY) {
+            out += "\n\nWhen you finished drinking the potion, you @@@ in your belt.";
+        }
+            
         item->BeConsumed();
         break;
     case Item::ItemType::BOTTLE:
         out += "fill the empty *bottle*, but there is nothing to put it in.";
         break;
     case Item::ItemType::MAP:
-
+        //if(item.get)
         out += "unfold the *map*.";
 
 
@@ -114,10 +122,10 @@ string Hero::UseItem(Item* item)
         out += "\n\tNumber: Room ID";
         out += "\n\tH: Hidden Room";
         out += "\n\tL: Locked Room";
-        out += "\n\tO: Exit Room";
-        out += "\nYou can use the '{go}to {h}idden' command to go there before the location of the hidden room.";
-        out += "\nYou can use the '{go}to {e}xit' command to beat the dungeon.";
-        out += "\nYou can use the '{u}se key direction' command to go open locked roor.";
+        out += "\n\tE: Exit Room";
+        out += "\nYou can use the 'goto hidden' command to go there before the location of the hidden room.";
+        out += "\nYou can use the 'goto exit' command to go away from the exit.";
+        out += "\nYou can use the 'inventory key (door-direction (n|w|s|e))' command to go open locked room (you must have a key).";
 
         break;
     case Item::ItemType::KEY:

@@ -10,12 +10,17 @@ public:
     //Creature();
     Creature(string name, string definition,int hp, int attack, int defense, int speed);
     virtual void BeCheked();
+    void SetCurrentAT(int at);
+    int GetCurrentAT(int at);
 
 protected:
     int curentHP;
     int attack;
     int defense;
     int speed;
+
+    //If-attack determiner
+    int currentAT;
 };
 
 #endif

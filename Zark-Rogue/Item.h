@@ -34,6 +34,7 @@ public:
 
     void BeCheked();
     ItemType GetType();
+    ItemLocation GetLocation();
     void BePicked();
     void BeDropped();
     void BeConsumed();

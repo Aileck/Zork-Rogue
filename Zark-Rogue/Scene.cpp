@@ -8,7 +8,7 @@ Scene::Scene():Checkeable("No way", "No way")
 
 void Scene::BeCheked() {
 	Checkeable::BeCheked();
-    string out = "You glanced at the item stuck in your belt.";
+    string out = "You vlavla.";
     out += "\n===Scene===";
 
     //Items
@@ -58,10 +58,6 @@ void Scene::AddItem(Item* item)
 void Scene::AddWeapon(Weapon* weapon)
 {
     weapons.push_back(weapon);
-}
-
-void Scene::RemoveItem(Item* item)
-{
 }
 
 
@@ -122,7 +118,9 @@ Item* Scene::IfContainsItem(string target)
     // Item
     for (int i = 0; i < items.size(); i++) {
         if (items.at(i)->GetName(true) == target) {
-            return items.at(i);
+            Item* copy = items.at(i);
+            items.erase(items.begin() + (i));
+            return copy;
         }
     }
 

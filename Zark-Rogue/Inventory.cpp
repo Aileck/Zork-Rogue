@@ -23,6 +23,7 @@ string Inventory::ShowAll()
         out += "\nYou couldn't help but marvel at how many things you could fit on your belt.";
     }
 
+    out += "\nTo use the item in your inventory, please use the command 'inventory (item name)'.";
 
     return out;
 }
@@ -51,8 +52,40 @@ void Inventory::DropWeapon(Weapon* weapon, Scene* scene)
     scene->AddWeapon(weapon);
 }
 
-Item* Inventory::IfContainsItemAndDrop(string target, Scene* scene)
+Item* Inventory::IfContainsItem(string target)
 {
+    //For inventory action
+    // Item
+    for (int i = 0; i < inventoryItems.size(); i++) {
+        if (inventoryItems.at(i)->GetName(true) == target) {
+            return inventoryItems.at(i);
+        }
+    }
+
+    return new Item();
+}
+
+Weapon* Inventory::IfContainsWeapon(string target)
+{
+    //For drop action
+    // Weapon
+    for (int i = 0; i < inventoryWeapons.size(); i++) {
+        if (inventoryWeapons.at(i)->GetName(true) == target) {
+            Weapon* copy = inventoryWeapons.at(i);
+            if (copy->GetEquipped()) {
+                //Return an error
+                return new Weapon(false);
+            }
+            return copy;
+        }
+    }
+
+    return new Weapon();
+}
+
+Item* Inventory::IfContainsItem(string target, Scene* scene)
+{
+    //For drop action
     // Item
     for (int i = 0; i < inventoryItems.size(); i++) {
         if (inventoryItems.at(i)->GetName(true) == target) {
@@ -65,8 +98,9 @@ Item* Inventory::IfContainsItemAndDrop(string target, Scene* scene)
     return new Item();
 }
 
-Weapon* Inventory::IfContainsWeaponAndDrop(string target, Scene* scene)
+Weapon* Inventory::IfContainsWeapon(string target, Scene* scene)
 {
+    //For drop action
     // Weapon
     for (int i = 0; i < inventoryWeapons.size(); i++) {
         if (inventoryWeapons.at(i)->GetName(true) == target) {

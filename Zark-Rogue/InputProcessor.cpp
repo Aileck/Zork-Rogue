@@ -49,7 +49,7 @@ bool InputProcessor::ProcessInput(string input, World* world)
             case InputProcessor::TALK:
                 break;
             case InputProcessor::INVENTORY:
-                InventoryAciton(world);
+                InventoryAciton(world, target);
                 break;
             case InputProcessor::USE:
                 UseAction(world, target);
@@ -170,18 +170,90 @@ int InputProcessor::GotoAction(Scene* s, string target) {
     return targetScene;
 }
 
-void InputProcessor::InventoryAciton(World* w)
+void InputProcessor::InventoryAciton(World* w , string target)
 {
-    string out = w->GetInventory()->ShowAll();
-    cout << out << endl;
+    if (target.size() == 0) {
+        string out = w->GetInventory()->ShowAll();
+        cout << out << endl;
+    }
+    else {
+        cout << "Your start to search and use *" + target + "* in your belt." << endl;
+
+        Item* searchedItem = new Item();
+        Weapon* searchedWeapon = new Weapon();
+        //Serarch order Inventory Item -> Inventory Weapon
+
+        //Search scene item
+        searchedItem = w->GetInventory()->IfContainsItem(target);
+
+        if (searchedItem->GetType() == Item::ItemType::NO_ITEM) {
+            //Search inven weapon
+            searchedWeapon = w->GetInventory()->IfContainsWeapon(target);
+            if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
+                //Case: cannot find anything
+                cout << "But you cannot find the *" + target + "* in your inventory." << endl;
+                cout << "You can yse'inventory' command to check your inventory." << endl;
+            }
+            else {
+                //Case: Find a weapon
+                if (searchedWeapon->GetType() == Weapon::WeaponType::EQUIPPED_ERROR) {
+                    cout << "But you have already weared it up." << endl;
+                }
+                else {
+                    string message = w->GetHero()->EquipWeapon(searchedWeapon);
+                    cout << message << endl;
+                }
+
+            }
+        }
+        else {
+            //Case: Find a item
+            string out = w->GetHero()->UseItem(searchedItem);
+            cout << out << endl;
+            if (searchedItem->GetType() == Item::ItemType::MAP) {
+
+                cout << "Your current location: Roon number " + to_string(w->GetCurrentScene()->GetSceneID()) << endl;
+            }
+            if (searchedItem->GetType() == Item::ItemType::KEY) {
+                //Split even more target
+                cout << "Use case key." << endl;
+            }
+        }
+
+        stringstream ss(target);
+        string word;
+        vector<string> words;
+
+        while (ss >> word) {
+            words.push_back(word);
+        }
+
+        string first = words[0];
+        string rest;
+        for (int i = 1; i < words.size(); ++i) {
+            target += words[i];
+            if (i != words.size() - 1) {
+                target += " ";
+            }
+        }
+
+        if (first == "key") {
+            cout << "Looks for a key?" << endl;
+
+        }
+    
+    
+    }
+
 }
 
 void InputProcessor::UseAction(World * w, string target)
 {
     Item* searchedItem = new Item();
     Weapon* searchedWeapon = new Weapon();
-    
-    //Serarch order Scene Item -> Scene Weapon -> Inventory item -> Inventory weapon
+
+
+    //Serarch order Scene Item -> Scene Weapon n
 
     //Search scene item
     searchedItem = w->GetCurrentScene()->IfContainsItem(target);
@@ -192,7 +264,7 @@ void InputProcessor::UseAction(World * w, string target)
         if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
             //Case: cannot find anything
             cout << "Cannot find the *" + target + "* you want to use." << endl;
-            cout << "If it is in your inventory, use the command 'use my " + target + "'." << endl;
+            cout << "If it is in your inventory, use the command 'inventory " + target + "'." << endl;
         }
         else {
             //Case: Find a weapon
@@ -209,6 +281,9 @@ void InputProcessor::UseAction(World * w, string target)
         cout << out << endl;
         if (searchedItem->GetType() == Item::ItemType::MAP) {
             cout << "Your current location: Roon number " + to_string(w->GetCurrentScene()->GetSceneID()) << endl;
+        }
+        if (searchedItem->GetType() == Item::ItemType::KEY) {
+            cout << "Perhaps you should pick up this key and insert it in the direction of the door you want to open." << endl;
         }
     }
 
@@ -242,7 +317,7 @@ void InputProcessor::PickAciton(World* w, string target)
         searchedWeapon = w->GetCurrentScene()->IfContainsWeapon(target);
         if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
             //Case: cannot find anything
-            cout << "But cannot find the *" + target + "* you want to pick." << endl;
+            cout << "But cannot find the *" + target + "* you want to pick!" << endl;
         }
         else {
             //Case: Find a weapon
@@ -273,11 +348,11 @@ void InputProcessor::DropAciton(World* w, string target)
     }
 
     //Search scene item
-    searchedItem = w->GetInventory()->IfContainsItemAndDrop(target,w->GetCurrentScene());
+    searchedItem = w->GetInventory()->IfContainsItem(target,w->GetCurrentScene());
 
     if (searchedItem->GetType() == Item::ItemType::NO_ITEM) {
         //Search scene weapon
-        searchedWeapon = w->GetInventory()->IfContainsWeaponAndDrop(target, w->GetCurrentScene());
+        searchedWeapon = w->GetInventory()->IfContainsWeapon(target, w->GetCurrentScene());
         if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
             //Case: cannot find anything
             cout << "Even if you want to throw *" + target + "*, you don't have it on you inventary." << endl;

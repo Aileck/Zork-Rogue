@@ -3,6 +3,7 @@
 World::World()
 {
     actualScene = 0;
+    inBattle = false;
     Scene* s0 = new Scene();
     AddScene(s0);
     hero = new Hero();
@@ -57,6 +58,7 @@ void World::GotoScene(int sceneid)
         return;
     }
 
+    lastScene = actualScene;
     actualScene = sceneid;
 
     scenes.at(sceneid)->BeCheked();

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BattleField.cpp" />
     <ClCompile Include="Checkeable.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Hero.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BattleField.h" />
     <ClInclude Include="Checkeable.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Enemy.h" />

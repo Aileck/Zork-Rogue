@@ -54,6 +54,9 @@
     <ClCompile Include="Inventory.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BattleField.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature.h">
@@ -84,6 +87,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleField.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

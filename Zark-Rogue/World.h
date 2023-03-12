@@ -18,6 +18,8 @@
 		   [7]
 
 */
+
+//Scene manager and game manager
 class World
 {
 public:
@@ -31,9 +33,13 @@ public:
 
 private:
     int actualScene;
+    int lastScene;
+
+
     Hero* hero;
     vector<Scene*> scenes;
     Inventory* inventory;
+    bool inBattle;
 };
 
 
