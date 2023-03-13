@@ -8,33 +8,46 @@ World::World()
     AddScene(s0);
     hero = new Hero();
     inventory = new Inventory();
-    Item* map = new Item("Map", "Map", Item::ItemType::MAP);
-    Item* potion = new Item("Potion", "Potion", Item::ItemType::Potion);
-
+    //map += "     [2] [H8]\n";
+    //map += "     | |/    \n";
+    //map += "[L6]=[1]=[3]=[4]  \n";
+    //map += "| |  | | | | \n";
+    //map += "[L9] [5] [H10]   \n";
+    //map += "     | |   \n";
+    //map += "     [E7]  \n";
     Scene* s1 = new Scene("Scene 1", "Level 1", 1);
-    Scene* sn = new Scene("Scene N", "Level N", 2);
-    Scene* sw = new Scene("Scene W", "Level W", 3);
-    Scene* ss = new Scene("Scene S", "Level S", 4);
-    Scene* se = new Scene("Scene E", "Level E", 5);
-    sn->SetLock(true);
+    Scene* s2 = new Scene("Scene 2", "Level N", 2);
+    Scene* s3 = new Scene("Scene 3", "Level W", 3);
+    Scene* s4 = new Scene("Scene 4", "Level S", 4);
+    Scene* s5 = new Scene("Scene 5", "Level E", 5);
+    Scene* s6 = new Scene("Scene 6", "Level E", 5);
+    Scene* s7 = new Scene("Scene 7", "Level E", 5);
+    Scene* s8 = new Scene("Scene 8", "Level E", 5);
+    Scene* s9 = new Scene("Scene 9", "Level E", 5);
+    Scene* s10 = new Scene("Scene 10", "Level E", 5);
+    //sn->SetLock(true);
 
-    s1->SetConnections(sn, se, ss, sw, s0);
+    //s1->SetConnections(sn, se, ss, sw, s0);
 
-    Enemy* e1 = new Enemy("M1", "m1",20,20,0,100);
-    Enemy* e2 = new Enemy("M2", "m1", 20, 20, 20, 1);
+    //Enemy* e1 = new Enemy("M1", "m1",9,5, 0,1);
+    //Enemy* e2 = new Enemy("M2", "m1",9,90, 1, 1);
 
-    s1->AddEnemy(e1);
-    s1->AddEnemy(e2);
+    //Item* newWeapon2 = new Weapon("Dragon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
+    //e1->SetHold(newWeapon2);
 
-    Weapon* newWeapon = new Weapon("Demon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
-    s1->AddWeapon(newWeapon);
-    s1->AddItem(map);
-    s1->AddItem(potion);
-    AddFirstScene(s1);
-    AddScene(sn);
-    AddScene(sw);
-    AddScene(ss);
-    AddScene(se);
+    //s1->AddEnemy(e1);
+    //s1->AddEnemy(e2);
+
+    //Weapon* newWeapon = new Weapon("Demon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
+    //s1->AddWeapon(newWeapon);
+    //s1->AddItem(map);
+    //s1->AddItem(potion);
+    //s1->AddItem(key);
+    //AddFirstScene(s1);
+    //AddScene(sn);
+    //AddScene(sw);
+    //AddScene(ss);
+    //AddScene(se);
 }
 
 

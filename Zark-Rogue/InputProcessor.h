@@ -6,7 +6,9 @@
 #include "Hero.h"
 #include "World.h"
 
+#include <iostream>
 #include <sstream>
+#include <cctype>
 
 /*
 Valid input:

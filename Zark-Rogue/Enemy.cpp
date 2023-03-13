@@ -8,7 +8,21 @@ Enemy::Enemy(string name, string definition, int hp, int attack, int defense, in
 	
 }
 
-void Enemy::SetHold(Item hold)
+void Enemy::SetHold(Item* hold)
 {
 	this->hold = hold;
+}
+
+Item* Enemy::DropHold() {
+	return hold;
+}
+
+void Enemy::CheckIfDead()
+{
+	if (currentHP <= 0) {
+		isDead = true;
+		cout << this->GetName() << " is dead." << endl;
+
+		//if(hold.GetType() != Item::ty)
+	}
 }

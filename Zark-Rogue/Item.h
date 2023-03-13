@@ -38,11 +38,14 @@ public:
     void BePicked();
     void BeDropped();
     void BeConsumed();
+    int GetUseTime();
+    void BeUsed();
     //string BeUsed(Hero* h);
 
 protected:
     ItemType type;
     ItemLocation location;
+    int useTime;
 };
 
 

@@ -1,5 +1,5 @@
 #include "InputProcessor.h"
-#include <cctype>
+
 
 bool InputProcessor::ProcessInput(string input, World* world)
 {
@@ -8,18 +8,30 @@ bool InputProcessor::ProcessInput(string input, World* world)
         Scene* thisScene = world->GetCurrentScene();
         Hero* thisHero = world->GetHero();
         if (thisScene->GetNoticed()) {
-            for (int i = 0; i < thisScene->GetEnemy().size(); i++) {
-                cout << "Before you could do anything, you were attacked." << endl;
-                int damage = thisScene->GetEnemy().at(i)->GetCurrentAttack() - thisHero->GetCurrentDefense();
+            //Change input color
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 
-                if (damage <= 0) {
-                    cout << thisScene->GetEnemy().at(i)->GetName() + " deals you 1 damage (NOW: " + to_string(thisHero->GetCurrentHP()) + " )." << endl;
-                }          
-                else {
-                    cout << thisScene->GetEnemy().at(i)->GetName() + " deals you " + to_string(damage) + " damage(NOW: " + to_string(thisHero->GetCurrentHP()) + ")." << endl << endl;
+            for (int i = 0; i < thisScene->GetEnemy().size(); i++) {
+                if (!thisScene->GetEnemy().at(i)->GetIsDead()) {
+                    cout << "Before you could do anything, you were attacked by a monster!" << endl;
+                    int damage = thisScene->GetEnemy().at(i)->GetCurrentAttack() - thisHero->GetCurrentDefense();
+
+                    //Avoid show negative number
+                    int currentHealth = ((thisHero->GetCurrentHP() - damage) <= 0) ? 0 : (thisHero->GetCurrentHP() - damage);
+                    if (damage <= 0) {
+                        cout << thisScene->GetEnemy().at(i)->GetName() + " deals you 1 damage (YOUR CURRENT HEALTH: " + to_string(currentHealth) + ")." << endl << endl;
+                    }
+                    else {
+                        cout << thisScene->GetEnemy().at(i)->GetName() + " deals you " + to_string(damage) + " damage (YOUR CURRENT HEALTH: " + to_string(currentHealth) + ")." << endl << endl;
+                    }
+                    thisHero->BeAttacked(damage);
+                
                 }
-                thisHero->BeAttacked(damage);
+  
             }
+            //Restore color
+            SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
         }
 
 
@@ -163,6 +175,7 @@ int InputProcessor::GotoAction(Scene* s, string target) {
 
     if (target.length() == 0) {
         cout << "Where would you like to go?" << endl;
+        cout << "\033[3m" <<  "Tips: You can use 'goto direction' command, direction can be north, west, south or east." << "\033[0m" << endl;
         cout << endl;
         return 0;
     }
@@ -247,13 +260,17 @@ void InputProcessor::AttackAction(World* w, string target)
 
         searchedEnemy->BeAttacked(damage);
 
+        //If drops something
+        if (searchedEnemy->GetIsDead()) {
+            cout << searchedEnemy->GetName() + " dropped "+ searchedEnemy->DropHold()->GetName() +" after you defeated it." << endl;
+            w->GetCurrentScene()->AddItem(searchedEnemy->DropHold());
+        }
+
         if (!w->GetCurrentScene()->GetNoticed()) {
             cout << "Your attack has attracted the attention of monsters." << endl;
             w->GetCurrentScene()->NoticedYou();
         }
-        //Attack all
-
-        //searchedEnemy->BeAttacked();
+        
     }
 
 }
@@ -265,8 +282,76 @@ void InputProcessor::InventoryAciton(World* w , string target)
         cout << out << endl;
     }
     else {
-        cout << "Your start to search and use *" + target + "* in your belt." << endl;
 
+
+        //Split even more target
+        stringstream ss(target);
+        string word;
+        vector<string> words;
+
+        while (ss >> word) {
+            words.push_back(word);
+        }
+
+        string first = words[0];
+        string rest;
+        for (int i = 1; i < words.size(); ++i) {
+            rest += words[i];
+            if (i != words.size() - 1) {
+                rest += " ";
+            }
+        }
+
+        //Spetial case
+        if (first == "key") {
+            cout << "Your start to search and use *key* in your belt." << endl;
+            Item* searchedKey = w->GetInventory()->IfContainsItem("key");
+            if (searchedKey->GetType() == Item::ItemType::KEY) {
+                if (rest.length() == 0) {
+                    cout << "You are holding a key in your hand and you don't know which door to insert it into." << endl;
+                    cout << "Tips: To use the key, use the command 'inventory key door-direction', door-direction can be north, west, south or east." << endl;
+                }
+                else {
+                    if (searchedKey->GetUseTime() >= 1) {
+                        cout << "You were not sure whether the key could be used to open another door again..." << endl;
+                    }
+                    string hint = "";
+                    if (rest == "n") {
+                        hint = "(north)";
+                    }
+                    if (rest == "w") {
+                        hint = "(west)";
+                    }
+                    if (rest == "s") {
+                        hint = "(south)";
+                    }
+                    if (rest == "e") {
+                        hint = "(east)";
+                    }
+                    bool unlocked = w->GetCurrentScene()->UnlockDestination(rest);
+
+                    if (unlocked) {
+                        searchedKey->BeUsed();
+                        cout << "And you succefuly oppened the *" + rest + "*" + hint + " direction door." << endl;
+                        if (searchedKey->GetUseTime() == 1) {
+                            cout << "You looked down at the key in your hand and realized that it had not disappeared." << endl;
+                            cout << "You were even surprised why you thought it would disappear." << endl;
+
+                            searchedKey->AddDefinition("It neither disappeared nor got damaged even after its use, what a miracle.");
+                        }
+                        if (searchedKey->GetUseTime() == 2) {
+                            cout << "You took another glance and confirmed that the key had not disappeared." << endl;
+                        }
+
+                    }
+                    else {
+                        cout << "But *" + rest + "*" + hint + " direction does not have any door." << endl;
+                    }
+                }
+            return;
+        }
+
+            cout << "Your start to search and use *" + target + "* in your belt." << endl;
         Item* searchedItem = new Item();
         Weapon* searchedWeapon = new Weapon();
         //Serarch order Inventory Item -> Inventory Weapon
@@ -280,7 +365,7 @@ void InputProcessor::InventoryAciton(World* w , string target)
             if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
                 //Case: cannot find anything
                 cout << "But you cannot find the *" + target + "* in your inventory." << endl;
-                cout << "You can yse'inventory' command to check your inventory." << endl;
+                cout << "Tips: You can use'inventory' command to check your inventory." << endl;
             }
             else {
                 //Case: Find a weapon
@@ -302,33 +387,12 @@ void InputProcessor::InventoryAciton(World* w , string target)
 
                 cout << "Your current location: Roon number " + to_string(w->GetCurrentScene()->GetSceneID()) << endl;
             }
-            if (searchedItem->GetType() == Item::ItemType::KEY) {
-                //Split even more target
-                cout << "Use case key." << endl;
+                    
+
             }
         }
 
-        stringstream ss(target);
-        string word;
-        vector<string> words;
 
-        while (ss >> word) {
-            words.push_back(word);
-        }
-
-        string first = words[0];
-        string rest;
-        for (int i = 1; i < words.size(); ++i) {
-            target += words[i];
-            if (i != words.size() - 1) {
-                target += " ";
-            }
-        }
-
-        if (first == "key") {
-            cout << "Looks for a key?" << endl;
-
-        }
     
     
     }
@@ -352,7 +416,7 @@ void InputProcessor::UseAction(World * w, string target)
         if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
             //Case: cannot find anything
             cout << "Cannot find the *" + target + "* you want to use." << endl;
-            cout << "If it is in your inventory, use the command 'inventory " + target + "'." << endl;
+            cout << "Tips: If it is in your inventory, use the command 'inventory " + target + "'." << endl;
         }
         else {
             //Case: Find a weapon
@@ -371,7 +435,7 @@ void InputProcessor::UseAction(World * w, string target)
             cout << "Your current location: Roon number " + to_string(w->GetCurrentScene()->GetSceneID()) << endl;
         }
         if (searchedItem->GetType() == Item::ItemType::KEY) {
-            cout << "Perhaps you should pick up this key and insert it in the direction of the door you want to open." << endl;
+            cout << "Perhaps you should pick up this key and insert it into the door you want to open." << endl;
         }
     }
 

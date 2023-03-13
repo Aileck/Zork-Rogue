@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-Hero::Hero():Creature("Hero", "The only thing you remember is that you are a hero.", 50,2,2,2) {
+Hero::Hero():Creature("Hero", "The only thing you remember is that you are a hero.", 50,3,3,0) {
     Weapon* nullHandLeft = new Weapon(Weapon::HAND_LEFT);
     Weapon* nullHandRight = new Weapon(Weapon::HAND_RIGHT);
     Weapon* nullFoot = new Weapon(Weapon::FOOT);
@@ -92,12 +92,12 @@ string Hero::UseItem(Item* item)
         //Could contruct another class or struct, to simplify project, i decided to add hp directly
         this->currentHP += 30;
         out += "\nYou feel more energetic. ";
-            
+        
         if (item->GetLocation() == Item::ItemLocation::FLOOR) {
             out += "\n\nAnd at the moment you finished drinking the potion, the empty bottle disappeared.";
         }
         if (item->GetLocation() == Item::ItemLocation::INVENTORY) {
-            out += "\n\nWhen you finished drinking the potion, you @@@ in your belt.";
+            out += "\n\Then you tied the empty bottle to your belt.";
         }
             
         item->BeConsumed();
@@ -112,7 +112,7 @@ string Hero::UseItem(Item* item)
 
             map += "     [2] [H8]\n";
             map += "     | |/    \n";
-            map += "[L3]=[1]=[4]=[6]  \n";
+            map += "[L6]=[1]=[3]=[4]  \n";
             map += "| |  | | | | \n";
             map += "[L9] [5] [H10]   \n";
             map += "     | |   \n";
@@ -123,16 +123,24 @@ string Hero::UseItem(Item* item)
         out += "\n\tH: Hidden Room";
         out += "\n\tL: Locked Room";
         out += "\n\tE: Exit Room";
-        out += "\nYou can use the 'goto hidden' command to go there before the location of the hidden room.";
-        out += "\nYou can use the 'goto exit' command to go away from the exit.";
+        out += "\nTips:";
+        out += "\nYou can use the 'goto hidden' command to go to the hidden room.";
         out += "\nYou can use the 'inventory key (door-direction (n|w|s|e))' command to go open locked room (you must have a key).";
-
+        item->BeUsed();
+        if (item->GetUseTime() >= 3) {
+            out += "\nThe map started to wrinkle after being used too many times.";
+            item->AddDefinition("The map started to wrinkle after being used too many times.");
+        }
+        if (item->GetUseTime() >= 10) {
+            out += "\nThe map started to deteriorate after being used too many times.";
+            item->AddDefinition("Upon closer inspection, signs of damage were already starting to show");
+        }
         break;
     case Item::ItemType::KEY:
-        out += "the *key*";
+        out += "then you found it.";
         break;
     case Item::ItemType::WEAPON:
-        out += "this is an errrrrrrrrrrrro";
+        out += "wear a *weapon*";
         break;
     default:
         break;
@@ -170,7 +178,8 @@ void Hero::CheckIfDead()
         cout << this->GetName() << " is dead." << endl;
         cout << "GAME OVER" << endl;
         cout << "This sentence flashed through your mind..." << endl;
-        cout << "You snapped out of it and realized that you hadn't died, and you weren't even injured. You didn't have time to think about whether it was all a dream, you had to keep fighting." << endl;
+        cout << "You snapped out of it and realized that you hadn't died, and you weren't even injured. " << endl;
+        cout << "Not having time to think about whether it was all a daydream, you had to keep fighting." << endl << endl;
     }
 }
 

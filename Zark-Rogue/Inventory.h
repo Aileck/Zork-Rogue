@@ -8,6 +8,7 @@
 #include "Scene.h";
 #include "Item.h";
 #include "Weapon.h";
+#include <Windows.h>
 
 class Inventory
 {

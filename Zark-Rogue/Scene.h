@@ -31,6 +31,9 @@ public:
     Item* IfContainsItem(string target);
     Enemy* IfContainsEnemy(string target);
     Weapon* IfContainsWeapon(string target);
+
+    bool UnlockDestination(string target);
+    bool TryUnlock();
     int CheckDestination(string target);
 
     bool GetNoticed();

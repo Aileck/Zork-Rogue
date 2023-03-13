@@ -49,6 +49,16 @@ void Item::BeConsumed()
     this->type = BOTTLE;
 }
 
+int Item::GetUseTime()
+{
+    return useTime;
+}
+
+void Item::BeUsed()
+{
+    useTime++;
+}
+
 //string Item::BeUsed(World w)
 //{
 //    string out = "You tried to the ";

@@ -23,7 +23,7 @@ string Inventory::ShowAll()
         out += "\nYou couldn't help but marvel at how many things you could fit on your belt.";
     }
 
-    out += "\nTo use the item in your inventory, please use the command 'inventory (item name)'.";
+    out += "\nTips:To use the item in your inventory, please use the command 'inventory (item name)'.";
 
     return out;
 }

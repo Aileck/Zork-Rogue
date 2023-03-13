@@ -7,18 +7,6 @@
 #include "Hero.h"
 #include "Scene.h"
 #include "BattleField.h"
-/* World map
-* Scene 0 = no route
-*          [2]   [8]
-           | | Hidden
-		   | | /
-* [3]=LOCK=[1]==[4]
-  | |      | |
- Hidden	   [5]
-  [9]	   | |
-		   [7]
-
-*/
 
 //Scene manager and game manager
 class World

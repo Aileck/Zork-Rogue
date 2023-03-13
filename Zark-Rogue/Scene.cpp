@@ -52,7 +52,15 @@ void Scene::AddEnemy(Enemy* enemy)
 
 void Scene::AddItem(Item* item)
 {
-    items.push_back(item);
+    Weapon* weapon = dynamic_cast<Weapon*>(item);
+    if (weapon) {
+        //If can cast as weapon
+        AddWeapon(weapon);
+    }
+    else {
+        items.push_back(item);
+    }
+
 }
 
 void Scene::AddWeapon(Weapon* weapon)
@@ -172,6 +180,38 @@ void Scene::SetConnections(Scene* n, Scene* w, Scene* s, Scene* e, Scene* h)
     if (h->GetSceneID() != 0) {
         h->SetHidden(true);
     }
+}
+
+bool Scene::UnlockDestination(string target)
+{
+    if (target == "north" || target == "n") {
+        return north->TryUnlock();
+    }
+
+    if (target == "west" || target == "w") {
+        return west->TryUnlock();
+    }
+
+    if (target == "south" || target == "s") {
+        return south->TryUnlock();
+    }
+
+    if (target == "east" || target == "e") {
+        return east->TryUnlock();
+    }
+
+    return false;
+}
+
+bool Scene::TryUnlock()
+{
+    if (this->locking == true) {
+        this->locking = false;
+        return true;
+    }
+
+    else
+        return false;
 }
 
 int Scene::CheckDestination(string target) {
