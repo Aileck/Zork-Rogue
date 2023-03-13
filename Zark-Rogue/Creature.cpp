@@ -18,12 +18,9 @@ Creature::Creature(string name, string definition, int hp, int attack, int defen
 
 void Creature::BeCheked() {
     cout << "=== " << Checkeable::GetName() << " ===" << endl;
-    cout << "=== " << this->currentHP << " ===" << endl;
+    cout <<  GetBasicDefinition() << endl;
     cout << "* " << "Attack: "<< this->attack << endl;
-    cout << "* " << "Defense: " << this->attack  << endl;
-    cout << "* " << "Speed: " << this->attack  << endl;
-
-    cout << "--------------------------------------" << endl;
+    cout << "* " << "Defense: " << this->defense  << endl;
     cout << "" << endl;
 }
 
@@ -54,10 +51,6 @@ int Creature::GetCurrentSpeed()
 
 void Creature::BeAttacked(int damage)
 {
-    if (damage <= 0) {
-        damage = 1;
-    }
-
     currentHP -= damage;
 
     CheckIfDead();

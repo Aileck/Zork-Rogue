@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-Hero::Hero():Creature("Hero", "The only thing you remember is that you are a hero.", 50,3,3,0) {
+Hero::Hero():Creature("Hero", "The only thing you remember is that you are a hero.", 50,3,0,0) {
     Weapon* nullHandLeft = new Weapon(Weapon::HAND_LEFT);
     Weapon* nullHandRight = new Weapon(Weapon::HAND_RIGHT);
     Weapon* nullFoot = new Weapon(Weapon::FOOT);
@@ -18,19 +18,17 @@ Hero::Hero():Creature("Hero", "The only thing you remember is that you are a her
 
 void Hero::BeCheked() {
     string attackByWeapon = (this->attackWeapon <= 0) ? "":" + (" + std::to_string(this->attackWeapon) + ")";
-    string defenseByWeapon = (this->attackWeapon <= 0) ? "" : " + (" + std::to_string(this->attackWeapon) + ")";
-    string speedByWeapon = (this->attackWeapon <= 0) ? "" : " + (" + std::to_string(this->attackWeapon) + ")";
+    string defenseByWeapon = (this->defenseWeapon <= 0) ? "" : " + (" + std::to_string(this->defenseWeapon) + ")";
 
     cout << "=== " << Checkeable::GetName() << " ===" << endl;
     cout << "=== " << this->currentHP << " ===" << endl;
     cout << "* " << "Attack: " << this->attack  << attackByWeapon << endl; 
-    cout << "* " << "Defense: " << this->attack << defenseByWeapon << endl;
-    cout << "* " << "Speed: " << this->attack << speedByWeapon << endl;
-    cout << " " << endl;
+    cout << "* " << "Defense: " << this->defense << defenseByWeapon << endl;
+    cout << endl;
     cout << "Your equipments "<< endl;
     cout << "* " << "Sword: " << handLeft->GetName() << " attack +" << handLeft->GetAttack() << endl;
     cout << "* " << "Shield: " << handRight -> GetName() << " defense +" << handRight ->GetDefense() << endl;
-    cout << "* " << "Foot: " << foot -> GetName() << " speed +" << foot->GetSpeed() << endl;
+    cout << "* " << "Foot: " << foot -> GetName()  << endl;
 
     cout << "" << endl;
 }
@@ -47,25 +45,26 @@ string Hero::EquipWeapon(Weapon* newWeapon)
             out += "\nGreat! You happen to need equip a sword, and then you won't be afraid of the monster in front of you.";
         }
         else {
+
             out += "\nAnd put " + this->handLeft->GetName()+ " in your inventory that was in your left hand.";
         }
         this->handLeft = newWeapon;
         ChangePowerByWeapon(newWeapon);
         break;
     case Weapon::HAND_RIGHT:
-        if (this->handRight->GetName() == "not equipped") {
-            out += "\nGreat! You happen to need equip a shield, that way it's harder for monsters to hurt you..";
+        if (this->handRight->GetName(true) == "not equipped") {
+            out += "\nGreat! You happen to need equip a shield, that way it's harder for monsters to hurt you.";
 
         }
         else {
-            out += "\nAnd put " + this->handLeft->GetName() + " in your inventory that was in your right hand.";
+            out += "\nAnd put " + this->handRight->GetName() + " in your inventory that was in your right hand.";
         }
-        out += "\nAnd put " + this->handLeft->GetName() + " in your inventory that was in your left hand.";
+        //out += "\nAnd put " + this->handLeft->GetName() + " in your inventory that was in your left hand.";
         this->handRight = newWeapon;
         ChangePowerByWeapon(newWeapon);
         break;
     case Weapon::FOOT:
-        if (this->foot->GetName() == "not equipped") {
+        if (this->foot->GetName(true) == "not equipped") {
         }
         else {
             out += "\nAnd put " + this->handLeft->GetName() + " in your inventory that was in your foot.";
@@ -80,6 +79,15 @@ string Hero::EquipWeapon(Weapon* newWeapon)
     return out;
 }
 
+void Hero::UnEquipWeapon(Weapon* newWeapon)
+{
+    this->attackWeapon -= newWeapon->GetAttack();
+    this->defenseWeapon -= newWeapon->GetDefense();
+    this->speedWeapon -= newWeapon->GetSpeed();
+    this->criticalRate -= newWeapon->GetCritical();
+
+}
+
 string Hero::UseItem(Item* item)
 {
     string out = "You tried to ";
@@ -90,7 +98,7 @@ string Hero::UseItem(Item* item)
     case Item::ItemType::Potion:
         out += "drink the *potion*";
         //Could contruct another class or struct, to simplify project, i decided to add hp directly
-        this->currentHP += 30;
+        this->currentHP += 20;
         out += "\nYou feel more energetic. ";
         
         if (item->GetLocation() == Item::ItemLocation::FLOOR) {
@@ -113,8 +121,8 @@ string Hero::UseItem(Item* item)
             map += "     [2] [H8]\n";
             map += "     | |/    \n";
             map += "[L6]=[1]=[3]=[4]  \n";
-            map += "| |  | | | | \n";
-            map += "[L9] [5] [H10]   \n";
+            map += "| |  | |  \n";
+            map += "[L9] [5]    \n";
             map += "     | |   \n";
             map += "     [E7]  \n";
         out += map;
@@ -123,9 +131,9 @@ string Hero::UseItem(Item* item)
         out += "\n\tH: Hidden Room";
         out += "\n\tL: Locked Room";
         out += "\n\tE: Exit Room";
-        out += "\nTips:";
+        out += "\n\033[3mTips:";
         out += "\nYou can use the 'goto hidden' command to go to the hidden room.";
-        out += "\nYou can use the 'inventory key (door-direction (n|w|s|e))' command to go open locked room (you must have a key).";
+        out += "\nYou can use the 'inventory key (door-direction (n|w|s|e))' command to go open locked room (you must have a key).\033[0m";
         item->BeUsed();
         if (item->GetUseTime() >= 3) {
             out += "\nThe map started to wrinkle after being used too many times.";
@@ -181,6 +189,47 @@ void Hero::CheckIfDead()
         cout << "You snapped out of it and realized that you hadn't died, and you weren't even injured. " << endl;
         cout << "Not having time to think about whether it was all a daydream, you had to keep fighting." << endl << endl;
     }
+}
+
+void Hero::LeveUp()
+{
+    int up1 = rand() % 3;
+    int up2 = rand() % 3;
+
+    int hpUp = 0;
+    int attackUp = 0;
+    int defenseUp = 0;
+
+    if (up1 == 0) {
+        hpUp += 10;
+    }
+    if (up1 == 1) {
+        attackUp++;
+    }
+    if (up1 == 2) {
+        defenseUp++;
+    }
+
+    if (up2 == 0) {
+        hpUp += 10;
+    }
+    if (up2 == 1) {
+        attackUp++;
+    }
+    if (up2 == 2) {
+        defenseUp++;
+    }
+
+    cout << "===LEVEL UP===" << endl;
+
+    cout << "* Helth point:" << to_string(currentHP) << " + " << to_string(hpUp) << endl;
+    cout << "* Attack     :"<< to_string(attack) << " + " << to_string(attackUp) << endl;
+    cout << "* Defense    :" <<to_string(defense) << " + " << to_string(defenseUp) << endl;
+
+    currentHP += hpUp;
+    attack += attackUp;
+    defense += defenseUp;
+ 
 }
 
 

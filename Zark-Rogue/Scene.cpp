@@ -8,22 +8,35 @@ Scene::Scene():Checkeable("No way", "No way")
 
 void Scene::BeCheked() {
 	Checkeable::BeCheked();
-    string out = "You vlavla.";
-    out += "\n===Scene===";
+    string out = "You observed the surrouding:";
+    out += "\n" + this->GetBasicDefinition() + "\n";
 
+    out += "\nThen, you see what's on the ground:";
+    if ((items.size() + weapons.size()  + enemies.size()) == 0) {
+        out += "\nBut there is nothing here.";
+    }
     //Items
-    out += "\n*Items:";
-    for (int i = 0; i < items.size(); i++) {
-        out += "\n\t* " + items.at(i)->GetName();
-    }
-    out += "\n*Weapons:";
-    for (int i = 0; i < weapons.size(); i++) {
-        out += "\n\t* " + weapons.at(i)->GetName();
+    if (enemies.size() > 0) {
+        out += "\n*Enemy:";
+        for (int i = 0; i < enemies.size(); i++) {
+            out += "\n\t* " + enemies.at(i)->GetName();
+        }
     }
 
-    if (weapons.size() > 2) {
-        out += "\nYou couldn't help but marvel at how many things you could fit on your belt.";
+    if (items.size() > 0) {
+        out += "\n*Items:";
+        for (int i = 0; i < items.size(); i++) {
+            out += "\n\t* " + items.at(i)->GetName();
+        }
     }
+
+    if (weapons.size() > 0) {
+        out += "\n*Weapons:";
+        for (int i = 0; i < weapons.size(); i++) {
+            out += "\n\t* " + weapons.at(i)->GetName();
+        }
+    }
+
 
 
     cout << out << endl;
@@ -92,6 +105,15 @@ bool Scene::isLocked()
 bool Scene::isHidden()
 {
 	return this->hiding;
+}
+
+void Scene::SetConnections(Scene* n, Scene* w, Scene* s, Scene* e)
+{
+    //Set 4 connections and a hidden room if exists
+    this->north = n;
+    this->east = e;
+    this->south = s;
+    this->west = w;
 }
 
 

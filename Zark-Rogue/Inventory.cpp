@@ -19,11 +19,11 @@ string Inventory::ShowAll()
         out += "\n\t* " + inventoryWeapons.at(i)->GetName();
     }
 
-    if (inventoryWeapons.size() > 2) {
+    if ((inventoryItems.size()+inventoryWeapons.size()) >= 3) {
         out += "\nYou couldn't help but marvel at how many things you could fit on your belt.";
     }
 
-    out += "\nTips:To use the item in your inventory, please use the command 'inventory (item name)'.";
+    out += "\n\033[3mTips:To use the item in your inventory, please use the command 'inventory (item name)'.\033[0m";
 
     return out;
 }

@@ -26,6 +26,7 @@ public:
     void SetHidden(bool ifIsHidden);
     bool isLocked();
     bool isHidden();
+    void SetConnections(Scene* n, Scene* w, Scene* s, Scene* e);
     void SetConnections(Scene* n, Scene* w, Scene* s, Scene* e, Scene* h);
     Checkeable* IfContains(string target);
     Item* IfContainsItem(string target);

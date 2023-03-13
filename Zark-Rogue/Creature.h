@@ -21,7 +21,9 @@ public:
     virtual void CheckIfDead();
 
 protected:
+    //Secret value for enemy
     int currentHP;
+
     int attack;
     int defense;
     int speed;

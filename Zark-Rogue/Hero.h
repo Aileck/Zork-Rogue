@@ -10,6 +10,7 @@ public:
     Hero();
     void BeCheked();
     string EquipWeapon(Weapon* newWeapon);
+    void UnEquipWeapon(Weapon* newWeapon);
     string UseItem(Item* item);
 
     int GetCurrentAttack() override;
@@ -17,6 +18,7 @@ public:
     int GetCurrentSpeed() override;
     int GetCriticalRate();
     void CheckIfDead();
+    void LeveUp();
 
     
 
@@ -25,6 +27,7 @@ private:
     int defenseWeapon;
     int speedWeapon;
 
+    //Secret value
     int criticalRate;
 
     Weapon* handLeft;

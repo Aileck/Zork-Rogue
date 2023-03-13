@@ -17,14 +17,16 @@ bool InputProcessor::ProcessInput(string input, World* world)
                     cout << "Before you could do anything, you were attacked by a monster!" << endl;
                     int damage = thisScene->GetEnemy().at(i)->GetCurrentAttack() - thisHero->GetCurrentDefense();
 
-                    //Avoid show negative number
-                    int currentHealth = ((thisHero->GetCurrentHP() - damage) <= 0) ? 0 : (thisHero->GetCurrentHP() - damage);
+                    //Minimum damage
                     if (damage <= 0) {
-                        cout << thisScene->GetEnemy().at(i)->GetName() + " deals you 1 damage (YOUR CURRENT HEALTH: " + to_string(currentHealth) + ")." << endl << endl;
+                        damage = 1;
                     }
-                    else {
-                        cout << thisScene->GetEnemy().at(i)->GetName() + " deals you " + to_string(damage) + " damage (YOUR CURRENT HEALTH: " + to_string(currentHealth) + ")." << endl << endl;
-                    }
+
+                    //Avoid show negative number
+                    int currentHealth = (thisHero->GetCurrentHP() - damage);
+ 
+                    cout << thisScene->GetEnemy().at(i)->GetName() + " deals you " + to_string(damage) + " damage (YOUR CURRENT HP: " + to_string(currentHealth) + ")." << endl << endl;
+
                     thisHero->BeAttacked(damage);
                 
                 }
@@ -71,7 +73,10 @@ bool InputProcessor::ProcessInput(string input, World* world)
                 break;
             case InputProcessor::GOTO:
                 destiny = GotoAction(world->GetCurrentScene(), target);
-                if (destiny > 0) {
+                if (destiny == -2) {
+                    world->GotoLastScene();
+                }
+                else if (destiny > 0) {
                     world->GotoScene(destiny);
                 }
                 break;
@@ -91,9 +96,11 @@ bool InputProcessor::ProcessInput(string input, World* world)
                 DropAciton(world, target);
                 break;
             case InputProcessor::HELP:
+                HelpAction();
                 break;
             case InputProcessor::NOTREGISTERED:
-                cout << "This is not a valid command." << endl;
+                cout << action +" is not a available action." << endl;
+                cout << "Perhaps you can try typing 'help' to see if there are any available commands or options." << endl;
                 break;
             default:
                 break;
@@ -160,6 +167,9 @@ void InputProcessor::CheckAction(World* w, string target)
 }
 int InputProcessor::GotoAction(Scene* s, string target) {
     string hint = "";
+    if (target == "back") {
+        return -2;
+    }
     if (target == "n") {
         hint = "(north)";
     }
@@ -241,7 +251,6 @@ void InputProcessor::AttackAction(World* w, string target)
         else {
             damage = h->GetCurrentAttack() - searchedEnemy->GetCurrentDefense();
         }
-        cout << to_string(damage) << endl;
         if (damage <= 3) {
             cout << "Your attacks seem to have not very effective on your opponent." << endl;
         }
@@ -260,11 +269,20 @@ void InputProcessor::AttackAction(World* w, string target)
 
         searchedEnemy->BeAttacked(damage);
 
-        //If drops something
-        if (searchedEnemy->GetIsDead()) {
-            cout << searchedEnemy->GetName() + " dropped "+ searchedEnemy->DropHold()->GetName() +" after you defeated it." << endl;
-            w->GetCurrentScene()->AddItem(searchedEnemy->DropHold());
+        //When win - If drops something + level up
+        if (searchedEnemy->GetIsDead() ) {
+            if(searchedEnemy->DropHold()->GetType() != Item::ItemType::NO_ITEM){
+                cout << searchedEnemy->GetName() + " dropped "+ searchedEnemy->DropHold()->GetName() +" after you defeated it." << endl;
+                w->GetCurrentScene()->AddItem(searchedEnemy->DropHold());
+            }
+            h->LeveUp();
+
+            if (searchedEnemy->GetName(true) == "evil dragon") {
+                EndGame();
+            }
+
         }
+        
 
         if (!w->GetCurrentScene()->GetNoticed()) {
             cout << "Your attack has attracted the attention of monsters." << endl;
@@ -282,8 +300,6 @@ void InputProcessor::InventoryAciton(World* w , string target)
         cout << out << endl;
     }
     else {
-
-
         //Split even more target
         stringstream ss(target);
         string word;
@@ -309,7 +325,7 @@ void InputProcessor::InventoryAciton(World* w , string target)
             if (searchedKey->GetType() == Item::ItemType::KEY) {
                 if (rest.length() == 0) {
                     cout << "You are holding a key in your hand and you don't know which door to insert it into." << endl;
-                    cout << "Tips: To use the key, use the command 'inventory key door-direction', door-direction can be north, west, south or east." << endl;
+                    cout << "\033[3mTips: To use the key, use the command 'inventory key door-direction', door-direction can be north, west, south or east.\033[0m" << endl;
                 }
                 else {
                     if (searchedKey->GetUseTime() >= 1) {
@@ -345,10 +361,11 @@ void InputProcessor::InventoryAciton(World* w , string target)
 
                     }
                     else {
-                        cout << "But *" + rest + "*" + hint + " direction does not have any door." << endl;
+                        cout << "But *" + rest + "*" + hint + " direction does not have any locked door." << endl;
                     }
                 }
-            return;
+                return;
+            }
         }
 
             cout << "Your start to search and use *" + target + "* in your belt." << endl;
@@ -365,7 +382,7 @@ void InputProcessor::InventoryAciton(World* w , string target)
             if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
                 //Case: cannot find anything
                 cout << "But you cannot find the *" + target + "* in your inventory." << endl;
-                cout << "Tips: You can use'inventory' command to check your inventory." << endl;
+                cout << "\033[3mTips: You can use'inventory' command to check your inventory.\033[0m" << endl;
             }
             else {
                 //Case: Find a weapon
@@ -384,20 +401,14 @@ void InputProcessor::InventoryAciton(World* w , string target)
             string out = w->GetHero()->UseItem(searchedItem);
             cout << out << endl;
             if (searchedItem->GetType() == Item::ItemType::MAP) {
-
                 cout << "Your current location: Roon number " + to_string(w->GetCurrentScene()->GetSceneID()) << endl;
             }
-                    
-
             }
         }
 
-
-    
-    
-    }
-
 }
+
+
 
 void InputProcessor::UseAction(World * w, string target)
 {
@@ -416,7 +427,7 @@ void InputProcessor::UseAction(World * w, string target)
         if (searchedWeapon->GetType() == Weapon::WeaponType::NO_WEAPON) {
             //Case: cannot find anything
             cout << "Cannot find the *" + target + "* you want to use." << endl;
-            cout << "Tips: If it is in your inventory, use the command 'inventory " + target + "'." << endl;
+            cout << "\033[3mTips: If it is in your inventory, use the command 'inventory " + target + "'.\033[0m" << endl;
         }
         else {
             //Case: Find a weapon
@@ -433,13 +444,21 @@ void InputProcessor::UseAction(World * w, string target)
         cout << out << endl;
         if (searchedItem->GetType() == Item::ItemType::MAP) {
             cout << "Your current location: Roon number " + to_string(w->GetCurrentScene()->GetSceneID()) << endl;
+            w->GetInventory()->AddItem(searchedItem);
+
+            cout << "You picked up *" + target + "* on the ground." << endl;
+
         }
         if (searchedItem->GetType() == Item::ItemType::KEY) {
             cout << "Perhaps you should pick up this key and insert it into the door you want to open." << endl;
+            w->GetInventory()->AddItem(searchedItem);
         }
     }
 
-
+    if (!w->GetCurrentScene()->GetNoticed()) {
+        cout << "Your action has attracted the attention of monsters." << endl;
+        w->GetCurrentScene()->NoticedYou();
+    }
 
      //Search inventory
 }
@@ -482,6 +501,11 @@ void InputProcessor::PickAciton(World* w, string target)
         w->GetInventory()->AddItem(searchedItem);
         cout << "You picked up *" + target + "* on the ground." << endl;
     }
+
+    if (!w->GetCurrentScene()->GetNoticed()) {
+        cout << "Your action has attracted the attention of monsters." << endl;
+        w->GetCurrentScene()->NoticedYou();
+    }
 }
 
 void InputProcessor::DropAciton(World* w, string target)
@@ -523,4 +547,40 @@ void InputProcessor::DropAciton(World* w, string target)
         w->GetInventory()->DropItem(searchedItem, w->GetCurrentScene());
         cout << "You dropped " + target + " on the ground." << endl;
     }
+
+    if (!w->GetCurrentScene()->GetNoticed()) {
+        cout << "Your action has attracted the attention of monsters." << endl;
+        w->GetCurrentScene()->NoticedYou();
+    }
+}
+
+void InputProcessor::HelpAction()
+{
+    cout << "{C}heck: \n\tCheck all the text enclosed in [] to get their details.\n\tSpecial usage 1: 'check me' to check yourself.\n\tSpecial usage 2: 'check here' to check the current scene." << endl;
+    cout << "{Go}to: \n\tUse {n}orth, {s}outh, {e}ast, or {w}est to navigate to a discovered location. Will fail if there's no path or if it's locked.\n\tYou can also use this command to escape during a battle.\n\tSpecial usage 1: 'goto back' to go back to the previous location." << endl;
+    cout << "{A}ttack:\n\t Choose the name of an enemy and attack it." << endl;
+    cout << "{I}nventory: \n\tShows all the items in your belt.\n\tType 'inventory + item name' to use or equip an item,\n\tor 'inventory + key + north/south/east/west' to unlock a door in that direction." << endl;
+    cout << "{U}se: \n\tUse an item in the current scene. Type 'use + item name'." << endl;
+    cout << "{P}ick: \n\tPick up an item in the current scene. Type 'pick + item name'." << endl;
+    cout << "{D}rop:\n\tDrop an item from your inventory into the current scene. Type 'drop + item name'." << endl;
+
+    cout << "Action name enclosed in {} means that can type text inside {} for shortcut." << endl;
+}
+
+void InputProcessor::EndGame()
+{
+    cout << "After defeating the dragon, you begin to walk towards the stairs.." << endl;
+    cout << "And after you step down the stairs, you feel your whole body is falling down." << endl;
+    cout << "Yes, the ladder disappeared." << endl;
+    cout << "You feel your body is continuously falling down, and you sense your memories slowly fading away." << endl;
+    cout << "When you wake up, you find yourself sleeping next to a large clock." << endl;
+    cout << "You don't remember anything else, only that you're a hero." << endl;
+    cout << "You don't have time to think it through. You notice several monsters in the distance." << endl;
+    cout << "You need to do something." << endl;
+
+    cout << "__THE END__" << endl;
+    cout << "__Thanks for play__" << endl;
+
+    exit(0);
+
 }

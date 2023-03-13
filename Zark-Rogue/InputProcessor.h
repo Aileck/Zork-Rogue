@@ -45,6 +45,8 @@ private:
 	static void UseAction(World* w, string target);
 	static void PickAciton(World* w, string target);
 	static void DropAciton(World* w, string target);
+	static void HelpAction();
+	static void EndGame();
 };
 
 #endif

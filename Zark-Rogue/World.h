@@ -16,6 +16,7 @@ public:
     void AddFirstScene(Scene* s);
     void AddScene(Scene* s);
     void GotoScene(int sceneid);
+    void GotoLastScene();
     Scene* GetCurrentScene();
     Hero* GetHero();
     Inventory* GetInventory();
@@ -27,7 +28,6 @@ private:
     Hero* hero;
     vector<Scene*> scenes;
     Inventory* inventory;
-    bool inBattle;
 };
 
 
