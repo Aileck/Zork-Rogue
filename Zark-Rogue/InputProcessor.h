@@ -13,7 +13,6 @@ Valid input:
 	- {C}heck
 	- {Go}to
 	- {A}ttack
-	- {T}alk
 	- {I}nventory
 	- {U}se
 	- {P}ick
@@ -27,7 +26,6 @@ public:
 		CHECK,
 		GOTO,
 		ATTACK,
-		TALK,
 		INVENTORY,
 		USE,
 		PICK,
@@ -40,6 +38,7 @@ private:
 	static InputType InputToAction(string s);
 	static void CheckAction(World* w, string target);
 	static int GotoAction(Scene* s, string target);
+	static void AttackAction(World* w, string target);
 	static void InventoryAciton(World* w, string target);
 	static void UseAction(World* w, string target);
 	static void PickAciton(World* w, string target);

@@ -20,6 +20,12 @@ World::World()
 
     s1->SetConnections(sn, se, ss, sw, s0);
 
+    Enemy* e1 = new Enemy("M1", "m1",20,20,0,100);
+    Enemy* e2 = new Enemy("M2", "m1", 20, 20, 20, 1);
+
+    s1->AddEnemy(e1);
+    s1->AddEnemy(e2);
+
     Weapon* newWeapon = new Weapon("Demon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
     s1->AddWeapon(newWeapon);
     s1->AddItem(map);

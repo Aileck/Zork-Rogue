@@ -4,6 +4,25 @@
 bool InputProcessor::ProcessInput(string input, World* world)
 {
     {
+        //If you are noticed by monsters
+        Scene* thisScene = world->GetCurrentScene();
+        Hero* thisHero = world->GetHero();
+        if (thisScene->GetNoticed()) {
+            for (int i = 0; i < thisScene->GetEnemy().size(); i++) {
+                cout << "Before you could do anything, you were attacked." << endl;
+                int damage = thisScene->GetEnemy().at(i)->GetCurrentAttack() - thisHero->GetCurrentDefense();
+
+                if (damage <= 0) {
+                    cout << thisScene->GetEnemy().at(i)->GetName() + " deals you 1 damage (NOW: " + to_string(thisHero->GetCurrentHP()) + " )." << endl;
+                }          
+                else {
+                    cout << thisScene->GetEnemy().at(i)->GetName() + " deals you " + to_string(damage) + " damage(NOW: " + to_string(thisHero->GetCurrentHP()) + ")." << endl << endl;
+                }
+                thisHero->BeAttacked(damage);
+            }
+        }
+
+
         //Input to lowercase
         string lower_input;
         for (char c : input) {
@@ -45,8 +64,7 @@ bool InputProcessor::ProcessInput(string input, World* world)
                 }
                 break;
             case InputProcessor::ATTACK:
-                break;
-            case InputProcessor::TALK:
+                AttackAction(world, target);
                 break;
             case InputProcessor::INVENTORY:
                 InventoryAciton(world, target);
@@ -168,6 +186,76 @@ int InputProcessor::GotoAction(Scene* s, string target) {
     cout << endl;
 
     return targetScene;
+}
+
+void InputProcessor::AttackAction(World* w, string target)
+{
+    Scene* s = w->GetCurrentScene();
+    Hero* h = w->GetHero();
+    //No enemy to attack
+    if (s->GetEnemy().size() == 0) {
+        cout << "You feel scared of the wicked thoughts in your mind. There is clearly no one here, why do you feel the urge to attack?" << endl;
+        return;
+    }
+
+    //No target
+    if (target.length() == 0) {
+        cout << "You have made up your mind to attack, but you don't know who to attack." << endl;
+        return;
+    }
+    Enemy* searchedEnemy = new Enemy();
+    cout << "You aimed at *" + target + "* and attacked it." << endl;
+
+    searchedEnemy = s->IfContainsEnemy(target);
+    if (searchedEnemy->GetName(true) == "no enemy") {
+        cout << "But you realize that what you just saw was an illusion, there is no *" + target + "* here." << endl;
+    }
+    else if(searchedEnemy->GetIsDead()) {
+        cout << "But *" + target + "* is alredy dead." << endl;
+    }
+    else {
+        //If critical attack
+        int randNum = rand() % 100;
+
+        int damage = 0;
+
+        if (randNum < h->GetCriticalRate()) {
+            // Critical attack!!
+            damage = (h->GetCurrentAttack()*2) - searchedEnemy->GetCurrentDefense();
+            searchedEnemy->BeAttacked(damage);
+            cout << "You seem to feel that even your soul is attacking with you, causing double damage." << endl;
+        }
+        else {
+            damage = h->GetCurrentAttack() - searchedEnemy->GetCurrentDefense();
+        }
+        cout << to_string(damage) << endl;
+        if (damage <= 3) {
+            cout << "Your attacks seem to have not very effective on your opponent." << endl;
+        }
+        else if (damage <= 10) {
+            cout << "Your attack caused some damage." << endl;
+        }
+        else if (damage <= 20) {
+            cout << "You pushed your opponent back a few steps." << endl;
+        }
+        else if (damage <= 30) {
+            cout << "Your attack seems to have caused a lot of damage" << endl;
+        }
+        else {
+            cout << "Your attack made the earth tremble along with it." << endl;
+        }
+
+        searchedEnemy->BeAttacked(damage);
+
+        if (!w->GetCurrentScene()->GetNoticed()) {
+            cout << "Your attack has attracted the attention of monsters." << endl;
+            w->GetCurrentScene()->NoticedYou();
+        }
+        //Attack all
+
+        //searchedEnemy->BeAttacked();
+    }
+
 }
 
 void InputProcessor::InventoryAciton(World* w , string target)

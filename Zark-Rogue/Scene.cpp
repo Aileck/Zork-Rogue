@@ -60,6 +60,11 @@ void Scene::AddWeapon(Weapon* weapon)
     weapons.push_back(weapon);
 }
 
+vector<Enemy*> Scene::GetEnemy()
+{
+    return this->enemies;
+}
+
 
 void Scene::SetLock(bool ifIsLocked)
 {
@@ -127,6 +132,18 @@ Item* Scene::IfContainsItem(string target)
     return new Item();
 }
 
+Enemy* Scene::IfContainsEnemy(string target)
+{
+    for (int i = 0; i < enemies.size(); i++) {
+        if (enemies.at(i)->GetName(true) == target) {
+
+            return enemies.at(i);
+        }
+    }
+
+    return new Enemy();
+}
+
 Weapon* Scene::IfContainsWeapon(string target)
 {
     // Weapon
@@ -181,4 +198,14 @@ int Scene::CheckDestination(string target) {
 
     else
         return -1;
+}
+
+bool Scene::GetNoticed()
+{
+    return enemiesNoticedYou;
+}
+
+void Scene::NoticedYou()
+{
+    enemiesNoticedYou = true;
 }

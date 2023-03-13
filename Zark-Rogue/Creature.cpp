@@ -10,7 +10,7 @@
 //}
 
 Creature::Creature(string name, string definition, int hp, int attack, int defense, int speed):Checkeable(name,definition) {
-    this->curentHP = hp;
+    this->currentHP = hp;
     this->attack = attack;
     this->defense = defense;
     this->speed = speed;
@@ -18,7 +18,7 @@ Creature::Creature(string name, string definition, int hp, int attack, int defen
 
 void Creature::BeCheked() {
     cout << "=== " << Checkeable::GetName() << " ===" << endl;
-    cout << "=== " << this->curentHP << " ===" << endl;
+    cout << "=== " << this->currentHP << " ===" << endl;
     cout << "* " << "Attack: "<< this->attack << endl;
     cout << "* " << "Defense: " << this->attack  << endl;
     cout << "* " << "Speed: " << this->attack  << endl;
@@ -26,3 +26,51 @@ void Creature::BeCheked() {
     cout << "--------------------------------------" << endl;
     cout << "" << endl;
 }
+
+bool Creature::GetIsDead()
+{
+    return isDead;
+}
+
+int Creature::GetCurrentHP()
+{
+    return currentHP;
+}
+
+int Creature::GetCurrentAttack()
+{
+    return this->attack;
+}
+
+int Creature::GetCurrentDefense()
+{
+    return this->defense;
+}
+
+int Creature::GetCurrentSpeed()
+{
+    return this->speed;
+}
+
+void Creature::BeAttacked(int damage)
+{
+    if (damage <= 0) {
+        damage = 1;
+    }
+
+    currentHP -= damage;
+
+    CheckIfDead();
+}
+
+void Creature::CheckIfDead()
+{
+    if (currentHP <= 0) {
+        isDead = true;
+        cout << this->GetName() << " is dead." << endl;
+    }
+}
+
+
+
+

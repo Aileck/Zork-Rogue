@@ -6,6 +6,7 @@
 #include "Inventory.h"
 #include "Hero.h"
 #include "Scene.h"
+#include "BattleField.h"
 /* World map
 * Scene 0 = no route
 *          [2]   [8]
@@ -34,7 +35,6 @@ public:
 private:
     int actualScene;
     int lastScene;
-
 
     Hero* hero;
     vector<Scene*> scenes;

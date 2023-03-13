@@ -8,9 +8,17 @@
 class Hero : public Creature {
 public:
     Hero();
-    virtual void BeCheked();
+    void BeCheked();
     string EquipWeapon(Weapon* newWeapon);
     string UseItem(Item* item);
+
+    int GetCurrentAttack() override;
+    int GetCurrentDefense() override;
+    int GetCurrentSpeed() override;
+    int GetCriticalRate();
+    void CheckIfDead();
+
+    
 
 private:
     int attackWeapon;

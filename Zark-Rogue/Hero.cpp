@@ -22,7 +22,7 @@ void Hero::BeCheked() {
     string speedByWeapon = (this->attackWeapon <= 0) ? "" : " + (" + std::to_string(this->attackWeapon) + ")";
 
     cout << "=== " << Checkeable::GetName() << " ===" << endl;
-    cout << "=== " << this->curentHP << " ===" << endl;
+    cout << "=== " << this->currentHP << " ===" << endl;
     cout << "* " << "Attack: " << this->attack  << attackByWeapon << endl; 
     cout << "* " << "Defense: " << this->attack << defenseByWeapon << endl;
     cout << "* " << "Speed: " << this->attack << speedByWeapon << endl;
@@ -90,7 +90,7 @@ string Hero::UseItem(Item* item)
     case Item::ItemType::Potion:
         out += "drink the *potion*";
         //Could contruct another class or struct, to simplify project, i decided to add hp directly
-        this->curentHP += 30;
+        this->currentHP += 30;
         out += "\nYou feel more energetic. ";
             
         if (item->GetLocation() == Item::ItemLocation::FLOOR) {
@@ -139,6 +139,39 @@ string Hero::UseItem(Item* item)
     }
 
     return out;
+}
+
+int Hero::GetCurrentAttack()
+{
+    return this->attack + attackWeapon;
+}
+
+int Hero::GetCurrentDefense()
+{
+    return this->defense + this->defenseWeapon;
+}
+
+int Hero::GetCurrentSpeed()
+{
+    return this->speed + this->speedWeapon;
+}
+
+int Hero::GetCriticalRate()
+{
+
+    return this->criticalRate;
+}
+
+void Hero::CheckIfDead()
+{
+    if (currentHP <= 0) {
+        currentHP = 50; 
+        cout << endl;
+        cout << this->GetName() << " is dead." << endl;
+        cout << "GAME OVER" << endl;
+        cout << "This sentence flashed through your mind..." << endl;
+        cout << "You snapped out of it and realized that you hadn't died, and you weren't even injured. You didn't have time to think about whether it was all a dream, you had to keep fighting." << endl;
+    }
 }
 
 
