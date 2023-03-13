@@ -160,44 +160,6 @@ World::World()
     s9->AddItem(p_9_1);
     s9->AddItem(p_9_2);
     s9->AddItem(p_9_3);
-
-
-    
-
-
-
-
-
-
-
-    
-
-    
-
-
-    //sn->SetLock(true);
-
-    //s1->SetConnections(sn, se, ss, sw, s0);
-
-    //Enemy* e1 = new Enemy("M1", "m1",9,5, 0,1);
-    //Enemy* e2 = new Enemy("M2", "m1",9,90, 1, 1);
-
-    //Item* newWeapon2 = new Weapon("Dragon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
-    //e1->SetHold(newWeapon2);
-
-    //s1->AddEnemy(e1);
-    //s1->AddEnemy(e2);
-
-    //Weapon* newWeapon = new Weapon("Demon Slayer", "Good", 200, 0, 0, 5, Weapon::HAND_LEFT);
-    //s1->AddWeapon(newWeapon);
-    //s1->AddItem(map);
-    //s1->AddItem(potion);
-    //s1->AddItem(key);
-    //AddFirstScene(s1);
-    //AddScene(sn);
-    //AddScene(sw);
-    //AddScene(ss);
-    //AddScene(se);
 }
 
 
