@@ -581,6 +581,8 @@ void InputProcessor::EndGame()
     cout << "__THE END__" << endl;
     cout << "__Thanks for play__" << endl;
 
+    cout << "Press any key to exit" << endl;
+    cin.get();
     exit(0);
 
 }

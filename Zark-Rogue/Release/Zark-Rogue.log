@@ -15,8 +15,8 @@ C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\InputProcessor.cpp(
 C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\InputProcessor.cpp(57,27): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Zark-Rogue\InputProcessor.cpp(314,27): warning C4018: “<”: 有符号/无符号不匹配
   正在生成代码
-  1 of 597 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  7 of 597 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    13 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   Zark-Rogue.vcxproj -> C:\Users\Aikeck\Desktop\GitHub_project\Zark-Rogue\Release\Zark-Rogue.exe
