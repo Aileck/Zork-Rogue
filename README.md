@@ -43,7 +43,7 @@ Finally, I did not design a Game Over system for when the player dies, because I
 | Use       | Use + [item name] to use an item in the current scene.                                        |
 | Pick      | Pick + [item name] to pick up an item in the current scene by using its name.                                       |
 | Drop      | Drop + [item name] to drop an item from your inventory into the current scene.                                      |
-
+| Help      | Show this table |
 <h3>Walkthrough - Summary - Recommended route</h3>
 <p>
 
